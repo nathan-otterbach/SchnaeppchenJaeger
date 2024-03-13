@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Nathan\\source\\repos\\SchnaeppchenJaeger\\SchnaeppchenJaeger.csproj": {}
+    "C:\\Users\\bitwise\\source\\repos\\SchnaeppchenJaeger\\SchnaeppchenJaeger.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Nathan\\source\\repos\\SchnaeppchenJaeger\\SchnaeppchenJaeger.csproj": {
+    "C:\\Users\\bitwise\\source\\repos\\SchnaeppchenJaeger\\SchnaeppchenJaeger.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nathan\\source\\repos\\SchnaeppchenJaeger\\SchnaeppchenJaeger.csproj",
+        "projectUniqueName": "C:\\Users\\bitwise\\source\\repos\\SchnaeppchenJaeger\\SchnaeppchenJaeger.csproj",
         "projectName": "SchnaeppchenJaeger",
-        "projectPath": "C:\\Users\\Nathan\\source\\repos\\SchnaeppchenJaeger\\SchnaeppchenJaeger.csproj",
-        "packagesPath": "C:\\Users\\Nathan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nathan\\source\\repos\\SchnaeppchenJaeger\\obj\\",
+        "projectPath": "C:\\Users\\bitwise\\source\\repos\\SchnaeppchenJaeger\\SchnaeppchenJaeger.csproj",
+        "packagesPath": "C:\\Users\\bitwise\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\bitwise\\source\\repos\\SchnaeppchenJaeger\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Nathan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\bitwise\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],

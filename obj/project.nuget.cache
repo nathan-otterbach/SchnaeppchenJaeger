@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "cZuvHxy6XWqkNq6z5LxBdbZgAlV/pTrVidwhscSy2OZ+WOWclYiLI/qxPDzXWDciS2RZ1q4WJz0S/Yf5ggHqLA==",
+  "dgSpecHash": "GVsdtkCaPM0nD1U3NJPd6RQibg0FbVqdibRzjOqynys3vMeUYNLdMzug5gy0CIq0Nrxje559az1r9JCelDxmaw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Nathan\\source\\repos\\SchnaeppchenJaeger\\SchnaeppchenJaeger.csproj",
+  "projectFilePath": "C:\\Users\\bitwise\\source\\repos\\SchnaeppchenJaeger\\SchnaeppchenJaeger.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Nathan\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+    "C:\\Users\\bitwise\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
   "logs": []
 }
