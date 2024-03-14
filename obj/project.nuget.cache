@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "GVsdtkCaPM0nD1U3NJPd6RQibg0FbVqdibRzjOqynys3vMeUYNLdMzug5gy0CIq0Nrxje559az1r9JCelDxmaw==",
+  "dgSpecHash": "Td0ts5pZly2o0gKvd+Vc2DCIJqCkAYh2fI/k4PVnr7CWlauhhz8Z6OG3TxZiQacIldPXpUAXjSpXvgAsEJCFvw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\bitwise\\source\\repos\\SchnaeppchenJaeger\\SchnaeppchenJaeger.csproj",
+  "projectFilePath": "C:\\Users\\Nathan\\source\\repos\\SchnaeppchenJaeger\\SchnaeppchenJaeger.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\bitwise\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+    "C:\\Users\\Nathan\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\Nathan\\.nuget\\packages\\polly\\8.3.1\\polly.8.3.1.nupkg.sha512",
+    "C:\\Users\\Nathan\\.nuget\\packages\\polly.core\\8.3.1\\polly.core.8.3.1.nupkg.sha512"
   ],
   "logs": []
 }

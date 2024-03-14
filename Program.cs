@@ -1,3 +1,4 @@
+
 namespace SchnaeppchenJaeger
 {
     internal static class Program
