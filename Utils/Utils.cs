@@ -2,16 +2,20 @@
 
 namespace SchnaeppchenJaeger.Utils
 {
-    internal class Utils
+    public class Utils
     {
         public Dictionary<string, string> GetPropertiesFromResponse(HttpResponseMessage response, params string[] propertyNames)
         {
+            var settings = new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+                MissingMemberHandling = MissingMemberHandling.Ignore
+            };
+
             // Read the content of the response as a string
             var contents = response.Content.ReadAsStringAsync().Result;
-
-            // Deserialize the JSON content to a dynamic object
-            dynamic jsonResponse = JsonConvert.DeserializeObject<dynamic>(contents)!;
-
+            dynamic root = JsonConvert.DeserializeObject<DTO.DTO.Root>(contents, settings)!;
+          
             // Create a dictionary to store the extracted properties
             var result = new Dictionary<string, string>();
 
@@ -19,7 +23,7 @@ namespace SchnaeppchenJaeger.Utils
             foreach (var propertyName in propertyNames)
             {
                 // Check if the property exists in the JSON response
-                var propertyValue = jsonResponse[propertyName].ToString();
+                var propertyValue = root[propertyName].ToString();
 
                 // Add the property and its value to the dictionary
                 result.Add(propertyName, propertyValue);

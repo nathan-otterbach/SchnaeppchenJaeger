@@ -1,41 +1,41 @@
 ﻿#pragma warning disable CS8618
 
-using System;
-using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text.Json.Nodes;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Polly;
 using Polly.Retry;
-using System.Threading.Tasks;
-using System.Threading;
 
 namespace SchnaeppchenJaeger.Client
 {
-    internal class Client : IDisposable
+    public class ApiClient : IDisposable
     {
         private bool _disposed = false;
         private readonly HttpClient _httpClient;
         private AsyncRetryPolicy<HttpResponseMessage> _retryPolicy;
+        private Utils.Utils _utils;
 
         private uint _zipCode;
         private string _querySearch;
         private string _baseUrl = "https://api.marktguru.de/api/v1/offers/search?as=web&";
         private const string _apiKey = "8Kk+pmbf7TgJ9nVj2cXeA7P5zBGv8iuutVVMRfOfvNE=";
 
-        public Client()
+        public ApiClient()
         {
             _httpClient = new HttpClient();
             _httpClient.DefaultRequestHeaders.Accept.Clear();
+            _httpClient.DefaultRequestHeaders.Add("X-Apikey", _apiKey);
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("X-Apikey", _apiKey);
 
             // Configure retry policy using Polly
             _retryPolicy = Policy.HandleResult<HttpResponseMessage>(response => !response.IsSuccessStatusCode)
                                  .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromSeconds(5),
                                  (response, timeSpan, retryCount, context) => { });
+            _utils = new Utils.Utils();
         }
 
-        public Client(uint zipCode, string querySearch) : this()
+        public ApiClient(uint zipCode, string querySearch) : this()
         {
             ZipCode = zipCode;
             QuerySearch = querySearch;
@@ -43,13 +43,17 @@ namespace SchnaeppchenJaeger.Client
 
         public async Task<string> GetOffersAsync(CancellationToken cancellationToken)
         {
-            var response = await _retryPolicy.ExecuteAsync(() => _httpClient.GetAsync($"{_baseUrl}&q={QuerySearch}&zipCode={ZipCode}", cancellationToken));
+            var response = await _retryPolicy.ExecuteAsync(() => _httpClient.GetAsync($"{_baseUrl}q={QuerySearch}&zipCode={ZipCode}", cancellationToken));
 
             response.EnsureSuccessStatusCode();
+            cancellationToken.ThrowIfCancellationRequested();
 
-            // get properties we need
+            var result = _utils.GetPropertiesFromResponse(response, "results");
 
-            return null;
+            string advertiser_name = result.;
+            MessageBox.Show(referenced_price.ToString());
+
+            return contents.ToString();
         }
 
         public uint ZipCode
