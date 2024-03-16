@@ -4,7 +4,7 @@ namespace SchnaeppchenJaeger.Utils
 {
     public class Utils
     {
-        public Dictionary<string, string> GetPropertiesFromResponse(HttpResponseMessage response, params string[] propertyNames)
+        public Dictionary<string, string> GetPropertiesFromResponse(HttpResponseMessage response)
         {
             var settings = new JsonSerializerSettings
             {
@@ -12,24 +12,24 @@ namespace SchnaeppchenJaeger.Utils
                 MissingMemberHandling = MissingMemberHandling.Ignore
             };
 
-            // Read the content of the response as a string
             var contents = response.Content.ReadAsStringAsync().Result;
             dynamic root = JsonConvert.DeserializeObject<DTO.DTO.Root>(contents, settings)!;
-          
-            // Create a dictionary to store the extracted properties
-            var result = new Dictionary<string, string>();
 
-            // Extract the specified properties from the dynamic object
-            foreach (var propertyName in propertyNames)
+            var populatedData = new Dictionary<string, string>();
+
+            for (int i = 0; i < root.results.Count; i++)
             {
-                // Check if the property exists in the JSON response
-                var propertyValue = root[propertyName].ToString();
-
-                // Add the property and its value to the dictionary
-                result.Add(propertyName, propertyValue);
+                populatedData[$"AdvertiserName_{i}"] = root.results[i].advertisers[0].name;
+                populatedData[$"Description_{i}"] = root.results[i].description;
+                populatedData[$"Price_{i}"] = root.results[i].price.ToString();
+                populatedData[$"ReferencePrice_{i}"] = root.results[i].referencePrice.ToString();
+                populatedData[$"Unit_{i}"] = root.results[i].unit.name;
+                populatedData[$"FromDate_{i}"] = root.results[i].validityDates[0].from.ToString();
+                populatedData[$"ToDate_{i}"] = root.results[i].validityDates[0].to.ToString();
+                populatedData[$"RequiresLoyaltyMembership_{i}"] = root.results[i].requiresLoyalityMembership.ToString();
             }
 
-            return result;
+            return populatedData;
         }
 
         public unsafe string Reverse(string s)

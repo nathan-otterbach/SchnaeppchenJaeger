@@ -1,7 +1,9 @@
 ﻿#pragma warning disable CS8618
 
+using System.Collections.Generic;
 using System.Net.Http.Headers;
 using System.Text.Json.Nodes;
+using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Polly;
@@ -20,6 +22,12 @@ namespace SchnaeppchenJaeger.Client
         private string _querySearch;
         private string _baseUrl = "https://api.marktguru.de/api/v1/offers/search?as=web&";
         private const string _apiKey = "8Kk+pmbf7TgJ9nVj2cXeA7P5zBGv8iuutVVMRfOfvNE=";
+
+        public enum Status
+        {
+            Success,
+            Failure
+        }
 
         public ApiClient()
         {
@@ -41,19 +49,19 @@ namespace SchnaeppchenJaeger.Client
             QuerySearch = querySearch;
         }
 
-        public async Task<string> GetOffersAsync(CancellationToken cancellationToken)
+        public async Task<Status> GetOffersAsync(CancellationToken cancellationToken)
         {
             var response = await _retryPolicy.ExecuteAsync(() => _httpClient.GetAsync($"{_baseUrl}q={QuerySearch}&zipCode={ZipCode}", cancellationToken));
 
             response.EnsureSuccessStatusCode();
             cancellationToken.ThrowIfCancellationRequested();
 
-            var result = _utils.GetPropertiesFromResponse(response, "results");
+            if (!_utils.GetPropertiesFromResponse(response).Any())
+            {
+                return Status.Failure;
+            }
 
-            string advertiser_name = result.;
-            MessageBox.Show(referenced_price.ToString());
-
-            return contents.ToString();
+            return Status.Success;
         }
 
         public uint ZipCode
