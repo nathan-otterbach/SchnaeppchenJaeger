@@ -46,17 +46,23 @@
             groupBox_select_shop = new GroupBox();
             checkedListBox_select_shop = new CheckedListBox();
             groupBox_create_list = new GroupBox();
+            textBox_product_name = new TextBox();
+            label_product_name = new Label();
             textBox_list_name = new TextBox();
             button1 = new Button();
             button2 = new Button();
             label_list_name = new Label();
-            textBox_product_name = new TextBox();
-            label_product_name = new Label();
+            groupBox1 = new GroupBox();
+            label2 = new Label();
+            groupBox_bill = new GroupBox();
+            richTextBox_bill = new RichTextBox();
             groupBox_modus.SuspendLayout();
             groupBox_modus_manual.SuspendLayout();
             groupBox_modus_automatic.SuspendLayout();
             groupBox_select_shop.SuspendLayout();
             groupBox_create_list.SuspendLayout();
+            groupBox1.SuspendLayout();
+            groupBox_bill.SuspendLayout();
             SuspendLayout();
             // 
             // button_search_manual
@@ -120,7 +126,7 @@
             groupBox_modus.Controls.Add(label_modus_indicator);
             groupBox_modus.Controls.Add(checkBox_modus);
             groupBox_modus.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            groupBox_modus.Location = new Point(654, 344);
+            groupBox_modus.Location = new Point(378, 12);
             groupBox_modus.Name = "groupBox_modus";
             groupBox_modus.Size = new Size(134, 94);
             groupBox_modus.TabIndex = 7;
@@ -181,7 +187,7 @@
             // button_cancel_automatic
             // 
             button_cancel_automatic.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button_cancel_automatic.Location = new Point(194, 133);
+            button_cancel_automatic.Location = new Point(194, 131);
             button_cancel_automatic.Name = "button_cancel_automatic";
             button_cancel_automatic.Size = new Size(153, 28);
             button_cancel_automatic.TabIndex = 7;
@@ -190,7 +196,7 @@
             // button_search_automatic
             // 
             button_search_automatic.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button_search_automatic.Location = new Point(15, 133);
+            button_search_automatic.Location = new Point(15, 131);
             button_search_automatic.Name = "button_search_automatic";
             button_search_automatic.Size = new Size(153, 28);
             button_search_automatic.TabIndex = 6;
@@ -220,7 +226,7 @@
             // 
             groupBox_select_shop.Controls.Add(checkedListBox_select_shop);
             groupBox_select_shop.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            groupBox_select_shop.Location = new Point(529, 12);
+            groupBox_select_shop.Location = new Point(518, 12);
             groupBox_select_shop.Name = "groupBox_select_shop";
             groupBox_select_shop.Size = new Size(259, 221);
             groupBox_select_shop.TabIndex = 10;
@@ -229,13 +235,14 @@
             // 
             // checkedListBox_select_shop
             // 
+            checkedListBox_select_shop.BorderStyle = BorderStyle.FixedSingle;
             checkedListBox_select_shop.CheckOnClick = true;
             checkedListBox_select_shop.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             checkedListBox_select_shop.FormattingEnabled = true;
             checkedListBox_select_shop.Items.AddRange(new object[] { "ALDI SÜD", "EDEKA", "Kaufland", "Lidl", "Netto Marken-Discount", "PENNY", "REWE" });
             checkedListBox_select_shop.Location = new Point(11, 37);
             checkedListBox_select_shop.Name = "checkedListBox_select_shop";
-            checkedListBox_select_shop.Size = new Size(238, 172);
+            checkedListBox_select_shop.Size = new Size(238, 170);
             checkedListBox_select_shop.TabIndex = 0;
             // 
             // groupBox_create_list
@@ -249,17 +256,35 @@
             groupBox_create_list.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             groupBox_create_list.Location = new Point(12, 189);
             groupBox_create_list.Name = "groupBox_create_list";
-            groupBox_create_list.Size = new Size(511, 249);
+            groupBox_create_list.Size = new Size(500, 360);
             groupBox_create_list.TabIndex = 11;
             groupBox_create_list.TabStop = false;
             groupBox_create_list.Text = "Einkaufslisten Anlegen";
+            // 
+            // textBox_product_name
+            // 
+            textBox_product_name.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox_product_name.Location = new Point(262, 61);
+            textBox_product_name.Name = "textBox_product_name";
+            textBox_product_name.Size = new Size(232, 29);
+            textBox_product_name.TabIndex = 10;
+            // 
+            // label_product_name
+            // 
+            label_product_name.AutoSize = true;
+            label_product_name.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label_product_name.Location = new Point(262, 37);
+            label_product_name.Name = "label_product_name";
+            label_product_name.Size = new Size(111, 21);
+            label_product_name.TabIndex = 9;
+            label_product_name.Text = "Produkt Name";
             // 
             // textBox_list_name
             // 
             textBox_list_name.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             textBox_list_name.Location = new Point(15, 61);
             textBox_list_name.Name = "textBox_list_name";
-            textBox_list_name.Size = new Size(224, 29);
+            textBox_list_name.Size = new Size(232, 29);
             textBox_list_name.TabIndex = 8;
             // 
             // button1
@@ -290,29 +315,56 @@
             label_list_name.TabIndex = 1;
             label_list_name.Text = "Einkaufsliste Name";
             // 
-            // textBox_product_name
+            // groupBox1
             // 
-            textBox_product_name.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox_product_name.Location = new Point(262, 61);
-            textBox_product_name.Name = "textBox_product_name";
-            textBox_product_name.Size = new Size(236, 29);
-            textBox_product_name.TabIndex = 10;
+            groupBox1.Controls.Add(label2);
+            groupBox1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            groupBox1.Location = new Point(378, 112);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(134, 71);
+            groupBox1.TabIndex = 12;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Status";
             // 
-            // label_product_name
+            // label2
             // 
-            label_product_name.AutoSize = true;
-            label_product_name.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label_product_name.Location = new Point(262, 37);
-            label_product_name.Name = "label_product_name";
-            label_product_name.Size = new Size(111, 21);
-            label_product_name.TabIndex = 9;
-            label_product_name.Text = "Produkt Name";
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.Red;
+            label2.Location = new Point(12, 35);
+            label2.Name = "label2";
+            label2.Size = new Size(103, 21);
+            label2.TabIndex = 9;
+            label2.Text = "Disconnected";
+            // 
+            // groupBox_bill
+            // 
+            groupBox_bill.Controls.Add(richTextBox_bill);
+            groupBox_bill.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            groupBox_bill.Location = new Point(518, 239);
+            groupBox_bill.Name = "groupBox_bill";
+            groupBox_bill.Size = new Size(259, 310);
+            groupBox_bill.TabIndex = 13;
+            groupBox_bill.TabStop = false;
+            groupBox_bill.Text = "Rechnung";
+            // 
+            // richTextBox_bill
+            // 
+            richTextBox_bill.BorderStyle = BorderStyle.FixedSingle;
+            richTextBox_bill.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            richTextBox_bill.Location = new Point(11, 32);
+            richTextBox_bill.Name = "richTextBox_bill";
+            richTextBox_bill.Size = new Size(238, 272);
+            richTextBox_bill.TabIndex = 0;
+            richTextBox_bill.Text = "";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(789, 561);
+            Controls.Add(groupBox_bill);
+            Controls.Add(groupBox1);
             Controls.Add(groupBox_create_list);
             Controls.Add(groupBox_select_shop);
             Controls.Add(groupBox_modus_automatic);
@@ -330,6 +382,9 @@
             groupBox_select_shop.ResumeLayout(false);
             groupBox_create_list.ResumeLayout(false);
             groupBox_create_list.PerformLayout();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            groupBox_bill.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -359,5 +414,9 @@
         private TextBox textBox_list_name;
         private TextBox textBox_product_name;
         private Label label_product_name;
+        private GroupBox groupBox1;
+        private Label label2;
+        private GroupBox groupBox_bill;
+        private RichTextBox richTextBox_bill;
     }
 }
