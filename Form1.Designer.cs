@@ -46,11 +46,15 @@
             groupBox_select_shop = new GroupBox();
             checkedListBox_select_shop = new CheckedListBox();
             groupBox_create_list = new GroupBox();
+            richTextBox_products = new RichTextBox();
+            comboBox_lists = new ComboBox();
+            button_remove_product_from_list = new Button();
+            button_add_product_to_list = new Button();
             textBox_product_name = new TextBox();
             label_product_name = new Label();
             textBox_list_name = new TextBox();
-            button1 = new Button();
-            button2 = new Button();
+            button_delete_list = new Button();
+            button_create_list = new Button();
             label_list_name = new Label();
             groupBox1 = new GroupBox();
             label2 = new Label();
@@ -77,16 +81,18 @@
             // 
             // textBox_zipCode
             // 
+            textBox_zipCode.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             textBox_zipCode.Location = new Point(15, 61);
             textBox_zipCode.Name = "textBox_zipCode";
-            textBox_zipCode.Size = new Size(88, 33);
+            textBox_zipCode.Size = new Size(88, 29);
             textBox_zipCode.TabIndex = 1;
             // 
             // textBox_product
             // 
+            textBox_product.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             textBox_product.Location = new Point(194, 61);
             textBox_product.Name = "textBox_product";
-            textBox_product.Size = new Size(153, 33);
+            textBox_product.Size = new Size(153, 29);
             textBox_product.TabIndex = 2;
             // 
             // label_PLZ
@@ -247,11 +253,15 @@
             // 
             // groupBox_create_list
             // 
+            groupBox_create_list.Controls.Add(richTextBox_products);
+            groupBox_create_list.Controls.Add(comboBox_lists);
+            groupBox_create_list.Controls.Add(button_remove_product_from_list);
+            groupBox_create_list.Controls.Add(button_add_product_to_list);
             groupBox_create_list.Controls.Add(textBox_product_name);
             groupBox_create_list.Controls.Add(label_product_name);
             groupBox_create_list.Controls.Add(textBox_list_name);
-            groupBox_create_list.Controls.Add(button1);
-            groupBox_create_list.Controls.Add(button2);
+            groupBox_create_list.Controls.Add(button_delete_list);
+            groupBox_create_list.Controls.Add(button_create_list);
             groupBox_create_list.Controls.Add(label_list_name);
             groupBox_create_list.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             groupBox_create_list.Location = new Point(12, 189);
@@ -260,6 +270,43 @@
             groupBox_create_list.TabIndex = 11;
             groupBox_create_list.TabStop = false;
             groupBox_create_list.Text = "Einkaufslisten Anlegen";
+            // 
+            // richTextBox_products
+            // 
+            richTextBox_products.Enabled = false;
+            richTextBox_products.Location = new Point(262, 108);
+            richTextBox_products.Name = "richTextBox_products";
+            richTextBox_products.Size = new Size(232, 178);
+            richTextBox_products.TabIndex = 14;
+            richTextBox_products.Text = "";
+            // 
+            // comboBox_lists
+            // 
+            comboBox_lists.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox_lists.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            comboBox_lists.FormattingEnabled = true;
+            comboBox_lists.Location = new Point(15, 108);
+            comboBox_lists.Name = "comboBox_lists";
+            comboBox_lists.Size = new Size(232, 29);
+            comboBox_lists.TabIndex = 13;
+            // 
+            // button_remove_product_from_list
+            // 
+            button_remove_product_from_list.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button_remove_product_from_list.Location = new Point(262, 326);
+            button_remove_product_from_list.Name = "button_remove_product_from_list";
+            button_remove_product_from_list.Size = new Size(232, 28);
+            button_remove_product_from_list.TabIndex = 12;
+            button_remove_product_from_list.Text = "Produkt aus Liste entfernen";
+            // 
+            // button_add_product_to_list
+            // 
+            button_add_product_to_list.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button_add_product_to_list.Location = new Point(262, 292);
+            button_add_product_to_list.Name = "button_add_product_to_list";
+            button_add_product_to_list.Size = new Size(232, 28);
+            button_add_product_to_list.TabIndex = 11;
+            button_add_product_to_list.Text = "Produkt zu Liste hinzufügen";
             // 
             // textBox_product_name
             // 
@@ -287,23 +334,23 @@
             textBox_list_name.Size = new Size(232, 29);
             textBox_list_name.TabIndex = 8;
             // 
-            // button1
+            // button_delete_list
             // 
-            button1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(194, 212);
-            button1.Name = "button1";
-            button1.Size = new Size(153, 28);
-            button1.TabIndex = 7;
-            button1.Text = "Suche abbrechen";
+            button_delete_list.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button_delete_list.Location = new Point(6, 326);
+            button_delete_list.Name = "button_delete_list";
+            button_delete_list.Size = new Size(241, 28);
+            button_delete_list.TabIndex = 7;
+            button_delete_list.Text = "Liste loeschen";
             // 
-            // button2
+            // button_create_list
             // 
-            button2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button2.Location = new Point(15, 212);
-            button2.Name = "button2";
-            button2.Size = new Size(153, 28);
-            button2.TabIndex = 6;
-            button2.Text = "Suche starten";
+            button_create_list.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button_create_list.Location = new Point(6, 292);
+            button_create_list.Name = "button_create_list";
+            button_create_list.Size = new Size(241, 28);
+            button_create_list.TabIndex = 6;
+            button_create_list.Text = "Liste erstellen";
             // 
             // label_list_name
             // 
@@ -351,6 +398,7 @@
             // richTextBox_bill
             // 
             richTextBox_bill.BorderStyle = BorderStyle.FixedSingle;
+            richTextBox_bill.Enabled = false;
             richTextBox_bill.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             richTextBox_bill.Location = new Point(11, 32);
             richTextBox_bill.Name = "richTextBox_bill";
@@ -408,8 +456,8 @@
         private GroupBox groupBox_select_shop;
         private CheckedListBox checkedListBox_select_shop;
         private GroupBox groupBox_create_list;
-        private Button button1;
-        private Button button2;
+        private Button button_delete_list;
+        private Button button_create_list;
         private Label label_list_name;
         private TextBox textBox_list_name;
         private TextBox textBox_product_name;
@@ -418,5 +466,9 @@
         private Label label2;
         private GroupBox groupBox_bill;
         private RichTextBox richTextBox_bill;
+        private Button button_remove_product_from_list;
+        private Button button_add_product_to_list;
+        private RichTextBox richTextBox_products;
+        private ComboBox comboBox_lists;
     }
 }
