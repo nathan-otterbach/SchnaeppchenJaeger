@@ -120,6 +120,8 @@ namespace SchnaeppchenJaeger.Client
                 _disposed = true;
             }
         }
+        
+        ~ApiClient() { Dispose(false); }
 
         #endregion
     }
