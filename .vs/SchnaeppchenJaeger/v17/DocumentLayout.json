@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\bitwise\\source\\repos\\SchnaeppchenJaeger\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D272B765-775E-43FE-B11E-110960F2A0FC}|SchnaeppchenJaeger.csproj|c:\\users\\bitwise\\source\\repos\\schnaeppchenjaeger\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{D272B765-775E-43FE-B11E-110960F2A0FC}|SchnaeppchenJaeger.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{D272B765-775E-43FE-B11E-110960F2A0FC}|SchnaeppchenJaeger.csproj|c:\\users\\bitwise\\source\\repos\\schnaeppchenjaeger\\readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{D272B765-775E-43FE-B11E-110960F2A0FC}|SchnaeppchenJaeger.csproj|solutionrelative:readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D272B765-775E-43FE-B11E-110960F2A0FC}|SchnaeppchenJaeger.csproj|C:\\Users\\bitwise\\source\\repos\\SchnaeppchenJaeger\\client\\apiclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D272B765-775E-43FE-B11E-110960F2A0FC}|SchnaeppchenJaeger.csproj|solutionrelative:client\\apiclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D272B765-775E-43FE-B11E-110960F2A0FC}|SchnaeppchenJaeger.csproj|C:\\Users\\bitwise\\source\\repos\\SchnaeppchenJaeger\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D272B765-775E-43FE-B11E-110960F2A0FC}|SchnaeppchenJaeger.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D272B765-775E-43FE-B11E-110960F2A0FC}|SchnaeppchenJaeger.csproj|C:\\Users\\bitwise\\source\\repos\\SchnaeppchenJaeger\\client\\apiclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D272B765-775E-43FE-B11E-110960F2A0FC}|SchnaeppchenJaeger.csproj|solutionrelative:client\\apiclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D272B765-775E-43FE-B11E-110960F2A0FC}|SchnaeppchenJaeger.csproj|C:\\Users\\bitwise\\source\\repos\\SchnaeppchenJaeger\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D272B765-775E-43FE-B11E-110960F2A0FC}|SchnaeppchenJaeger.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,41 +26,55 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
+              "Title": "README.md",
+              "DocumentMoniker": "C:\\Users\\bitwise\\source\\repos\\SchnaeppchenJaeger\\README.md",
+              "RelativeDocumentMoniker": "README.md",
+              "ToolTip": "C:\\Users\\bitwise\\source\\repos\\SchnaeppchenJaeger\\README.md",
+              "RelativeToolTip": "README.md",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAA2AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2024-03-26T23:18:00.454Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "ApiClient.cs",
               "DocumentMoniker": "C:\\Users\\bitwise\\source\\repos\\SchnaeppchenJaeger\\Client\\ApiClient.cs",
               "RelativeDocumentMoniker": "Client\\ApiClient.cs",
               "ToolTip": "C:\\Users\\bitwise\\source\\repos\\SchnaeppchenJaeger\\Client\\ApiClient.cs",
               "RelativeToolTip": "Client\\ApiClient.cs",
-              "ViewState": "AQIAAB8AAAAAAAAAAAAgwD8AAAAiAAAA",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAD8AAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-16T13:00:25.019Z"
+              "WhenOpened": "2024-03-16T13:00:25.019Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Form1.cs",
               "DocumentMoniker": "C:\\Users\\bitwise\\source\\repos\\SchnaeppchenJaeger\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "C:\\Users\\bitwise\\source\\repos\\SchnaeppchenJaeger\\Form1.cs*",
-              "RelativeToolTip": "Form1.cs*",
-              "ViewState": "AQIAABgAAAAAAAAAAIA3wFIAAAAAAAAA",
+              "ToolTip": "C:\\Users\\bitwise\\source\\repos\\SchnaeppchenJaeger\\Form1.cs",
+              "RelativeToolTip": "Form1.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAFIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-15T08:56:40.726Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\bitwise\\source\\repos\\SchnaeppchenJaeger\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "C:\\Users\\bitwise\\source\\repos\\SchnaeppchenJaeger\\Form1.cs [Design]*",
-              "RelativeToolTip": "Form1.cs [Design]*",
+              "ToolTip": "C:\\Users\\bitwise\\source\\repos\\SchnaeppchenJaeger\\Form1.cs [Design]",
+              "RelativeToolTip": "Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-15T08:55:11.455Z",
               "EditorCaption": " [Design]"

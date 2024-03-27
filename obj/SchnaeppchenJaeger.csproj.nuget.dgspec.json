@@ -57,6 +57,10 @@
             "Polly": {
               "target": "Package",
               "version": "[8.3.1, )"
+            },
+            "System.Data.SQLite": {
+              "target": "Package",
+              "version": "[1.0.118, )"
             }
           },
           "imports": [
