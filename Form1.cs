@@ -27,9 +27,11 @@ namespace SchnaeppchenJaeger
             // grab zip from user input
             // grab search term from user input or sql database
             var searchTerm = textBox_product.Text; // Example: Fetch search term from a text box
-            var _client = new ApiClient(74564, searchTerm);
 
-            var result = await _client.GetOffersAsync(_cancellationTokenSource.Token);
+            using (var client = new ApiClient(74564, "coca cola"))
+            {
+                await client.GetOffersAsync(_cancellationTokenSource.Token);
+            }
         }
 
         private void checkBox_modus_CheckedChanged(object sender, EventArgs e)
@@ -80,5 +82,10 @@ namespace SchnaeppchenJaeger
         }
 
         #endregion
+
+        private async void button_search_automatic_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

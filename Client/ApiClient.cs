@@ -1,11 +1,7 @@
 ﻿#pragma warning disable CS8618
 
-using System.Collections.Generic;
+using System.Configuration;
 using System.Net.Http.Headers;
-using System.Text.Json.Nodes;
-using System.Windows.Forms;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Polly;
 using Polly.Retry;
 
@@ -20,8 +16,6 @@ namespace SchnaeppchenJaeger.Client
 
         private uint _zipCode;
         private string _querySearch;
-        private string _baseUrl = "https://api.marktguru.de/api/v1/offers/search?as=web&";
-        private const string _apiKey = "8Kk+pmbf7TgJ9nVj2cXeA7P5zBGv8iuutVVMRfOfvNE=";
 
         public enum Status
         {
@@ -33,7 +27,7 @@ namespace SchnaeppchenJaeger.Client
         {
             _httpClient = new HttpClient();
             _httpClient.DefaultRequestHeaders.Accept.Clear();
-            _httpClient.DefaultRequestHeaders.Add("X-Apikey", _apiKey);
+            _httpClient.DefaultRequestHeaders.Add("X-Apikey", ConfigurationManager.AppSettings["ApiKey"]);
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             // Configure retry policy using Polly
@@ -51,7 +45,7 @@ namespace SchnaeppchenJaeger.Client
 
         public async Task<Status> GetOffersAsync(CancellationToken cancellationToken)
         {
-            var response = await _retryPolicy.ExecuteAsync(() => _httpClient.GetAsync($"{_baseUrl}q={QuerySearch}&zipCode={ZipCode}", cancellationToken));
+            var response = await _retryPolicy.ExecuteAsync(() => _httpClient.GetAsync($"{ConfigurationManager.AppSettings["BaseUrl"]}q={QuerySearch}&zipCode={ZipCode}", cancellationToken));
 
             response.EnsureSuccessStatusCode();
             cancellationToken.ThrowIfCancellationRequested();

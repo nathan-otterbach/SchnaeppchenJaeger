@@ -207,6 +207,7 @@
             button_search_automatic.Size = new Size(153, 28);
             button_search_automatic.TabIndex = 6;
             button_search_automatic.Text = "Suche starten";
+            button_search_automatic.Click += button_search_automatic_Click;
             // 
             // label1
             // 

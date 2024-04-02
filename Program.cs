@@ -1,5 +1,3 @@
-
-
 using SchnaeppchenJaeger.Client;
 
 namespace SchnaeppchenJaeger
