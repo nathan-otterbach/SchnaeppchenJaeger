@@ -3,10 +3,9 @@ using SQLite;
 
 namespace SchnaeppchenJaeger.Model
 {
+    // product model?
     public class Models
     {
-        [PrimaryKey, AutoIncrement]
-        public ulong ID { get; set; }
         public string AdvertiserName { get; set; }
         public string Description { get; set; }
         public float Price { get; set; }
