@@ -12,7 +12,6 @@ namespace SchnaeppchenJaeger.Database
         private static readonly Lazy<DatabaseHelper> _instance = new Lazy<DatabaseHelper>(() => new DatabaseHelper());
 
         private SQLiteConnection _connection;
-        private SQLiteTransaction _transaction;
         private bool _disposed = false;
 
         /// <summary>
@@ -21,9 +20,15 @@ namespace SchnaeppchenJaeger.Database
         private DatabaseHelper()
         {
             var connectionString = $"Data Source={GetDatabaseFilePath()};Version=3;";
-            _connection = new SQLiteConnection(connectionString);
-            _connection.Open();
-            _transaction = _connection.BeginTransaction();
+
+            if (_connection == null)
+            {
+                _connection = new SQLiteConnection(connectionString);
+                if (_connection.State != ConnectionState.Open)
+                {
+                    _connection.Open();
+                }
+            }
         }
 
         /// <summary>
@@ -37,24 +42,91 @@ namespace SchnaeppchenJaeger.Database
         /// <param name="tableName">Name of the table to create.</param>
         public void CreateShoppingListTable(string tableName)
         {
-            if (string.IsNullOrWhiteSpace(tableName))
-                throw new ArgumentException("Table name cannot be null or empty.", nameof(tableName));
-
-            string commandText = $@"CREATE TABLE IF NOT EXISTS {tableName} (
-                                    AdvertiserName TEXT,
-                                    Description TEXT,
-                                    Price REAL,
-                                    ReferencePrice REAL,
-                                    Unit TEXT,
-                                    FromDate DATETIME,
-                                    ToDate DATETIME,
-                                    RequiresLoyaltyMembership INTEGER)";
-
-            using (var command = new SQLiteCommand(commandText, _connection))
+            try
             {
-                command.ExecuteNonQuery();
+                if (string.IsNullOrWhiteSpace(tableName))
+                    throw new ArgumentException("Table name cannot be null or empty.", nameof(tableName));
+
+                string commandText = $@"CREATE TABLE IF NOT EXISTS {tableName} (
+                                        ProductName TEXT,
+                                        AdvertiserName TEXT,
+                                        Description TEXT,
+                                        Price REAL,
+                                        ReferencePrice REAL,
+                                        Unit TEXT,
+                                        FromDate DATETIME,
+                                        ToDate DATETIME,
+                                        RequiresLoyaltyMembership INTEGER)";
+
+                using (var command = new SQLiteCommand(commandText, _connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error creating table: {ex.Message}");
+                throw;
             }
         }
+
+        /// <summary>
+        /// Deletes all shopping lists from the specified table.
+        /// </summary>
+        /// <param name="tableName">Name of the table to delete from.</param>
+        public void DeleteShoppingLists(string tableName)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(tableName))
+                    throw new ArgumentException("Table name cannot be null or empty.", nameof(tableName));
+
+                string commandText = $@"DROP TABLE {tableName}";
+
+                using (var command = new SQLiteCommand(commandText, _connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting shopping lists: {ex.Message}");
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Retrieves the list of available shopping list tables from the SQLite database.
+        /// </summary>
+        /// <returns>List of table names.</returns>
+        public List<string> GetShoppingListTables()
+        {
+            List<string> tableNames = new List<string>();
+
+            try
+            {
+                using (SQLiteCommand command = new SQLiteCommand("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'", _connection))
+                {
+                    using (SQLiteDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            tableNames.Add(reader.GetString(0));
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving shopping list tables: {ex.Message}");
+                throw;
+            }
+
+            return tableNames;
+        }
+
+
+
 
         /// <summary>
         /// Method to insert shopping lists into a table.
@@ -88,22 +160,6 @@ namespace SchnaeppchenJaeger.Database
         public bool IsDatabaseConnected()
         {
             return _connection.State == ConnectionState.Open;
-        }
-
-        /// <summary>
-        /// Method to commit transaction.
-        /// </summary>
-        public void CommitTransaction()
-        {
-            _transaction.Commit();
-        }
-
-        /// <summary>
-        /// Method to rollback transaction.
-        /// </summary>
-        public void RollbackTransaction()
-        {
-            _transaction.Rollback();
         }
 
         /// <summary>
@@ -170,7 +226,6 @@ namespace SchnaeppchenJaeger.Database
             {
                 if (disposing)
                 {
-                    _transaction.Dispose();
                     _connection.Dispose();
                 }
 

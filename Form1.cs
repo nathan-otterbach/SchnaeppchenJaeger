@@ -31,6 +31,8 @@ namespace SchnaeppchenJaeger
 
             _cancellationTokenSource = new CancellationTokenSource();
             UpdateUIForMode();
+
+            PopulateShoppingListComboBox();
         }
 
         private async void button_test_Click(object sender, EventArgs e)
@@ -109,11 +111,50 @@ namespace SchnaeppchenJaeger
             }
         }
 
+        private string ReplaceSpecialCharacters(string tableName)
+        {
+            char[] specialCharacters = new char[] { ' ', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '+', '=', '{', '}', '[', ']', ';', ':', '\'', '"', ',', '.', '/', '\\', '<', '>', '?' };
+            for (int i = 0; i < specialCharacters.Length; i++)
+            {
+                tableName = tableName.Replace(specialCharacters[i], '_');
+            }
+
+            return tableName;
+        }
+
+        private void PopulateShoppingListComboBox()
+        {
+            comboBox_lists.Items.Clear();
+            List<string> tableNames = _dbHelper.GetShoppingListTables();
+            comboBox_lists.Items.AddRange(tableNames.ToArray());
+            comboBox_lists.SelectedIndex = 0;
+        }
+
+
         #endregion
 
         private async void button_search_automatic_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button_create_list_Click(object sender, EventArgs e)
+        {
+            string tableName = ReplaceSpecialCharacters(textBox_list_name.Text.Trim());
+            _dbHelper.CreateShoppingListTable(tableName);
+
+            PopulateShoppingListComboBox();
+        }
+
+        private void button_delete_list_Click(object sender, EventArgs e)
+        {
+            if (comboBox_lists.SelectedIndex != -1)
+            {
+                string tableName = comboBox_lists.SelectedItem.ToString();
+                _dbHelper.DeleteShoppingLists(tableName);
+
+                PopulateShoppingListComboBox();
+            }
         }
     }
 }

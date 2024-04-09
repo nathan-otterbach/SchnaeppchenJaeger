@@ -343,6 +343,7 @@
             button_delete_list.Size = new Size(241, 28);
             button_delete_list.TabIndex = 7;
             button_delete_list.Text = "Liste loeschen";
+            button_delete_list.Click += button_delete_list_Click;
             // 
             // button_create_list
             // 
@@ -352,6 +353,7 @@
             button_create_list.Size = new Size(241, 28);
             button_create_list.TabIndex = 6;
             button_create_list.Text = "Liste erstellen";
+            button_create_list.Click += button_create_list_Click;
             // 
             // label_list_name
             // 
