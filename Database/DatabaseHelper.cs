@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Data.SQLite;
+using System.Text;
 using SchnaeppchenJaeger.Model;
 
 namespace SchnaeppchenJaeger.Database
@@ -150,6 +151,87 @@ namespace SchnaeppchenJaeger.Database
                 };
 
                 InsertShoppingList(tableName, shoppingList);
+            }
+        }
+
+        /// <summary>
+        /// Inserts a single item into the specified shopping list table.
+        /// </summary>
+        /// <param name="tableName">Name of the table to insert into.</param>
+        /// <param name="productName">Name of the product to insert.</param>
+        public void InsertItemIntoShoppingList(string tableName, string productName)
+        {
+            try
+            {
+                string commandText = $@"INSERT INTO {tableName} (ProductName) VALUES (@ProductName)";
+
+                using (var command = new SQLiteCommand(commandText, _connection))
+                {
+                    command.Parameters.AddWithValue("@ProductName", productName);
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error inserting item into shopping list: {ex.Message}");
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Removes a single item from the specified shopping list table.
+        /// </summary>
+        /// <param name="tableName">Name of the table to remove from.</param>
+        /// <param name="productName">Name of the product to remove.</param>
+        public void RemoveItemFromShoppingList(string tableName, string productName)
+        {
+            try
+            {
+                string commandText = $@"DELETE FROM {tableName} WHERE ProductName = @ProductName";
+
+                using (var command = new SQLiteCommand(commandText, _connection))
+                {
+                    command.Parameters.AddWithValue("@ProductName", productName);
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error removing item from shopping list: {ex.Message}");
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Retrieves all products from the specified shopping list table.
+        /// </summary>
+        /// <param name="tableName">Name of the table to retrieve products from.</param>
+        /// <returns>A string containing all products in the specified shopping list table.</returns>
+        public List<string> GetAllProductsFromShoppingList(string tableName)
+        {
+            try
+            {
+                List<string> products = new List<string>();
+
+                string commandText = $@"SELECT ProductName FROM {tableName}";
+
+                using (var command = new SQLiteCommand(commandText, _connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            products.Add(reader["ProductName"].ToString());
+                        }
+                    }
+                }
+
+                return products;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving products from shopping list: {ex.Message}");
+                throw;
             }
         }
 

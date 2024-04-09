@@ -46,7 +46,7 @@
             groupBox_select_shop = new GroupBox();
             checkedListBox_select_shop = new CheckedListBox();
             groupBox_create_list = new GroupBox();
-            richTextBox_products = new RichTextBox();
+            listBox_products = new ListBox();
             comboBox_lists = new ComboBox();
             button_remove_product_from_list = new Button();
             button_add_product_to_list = new Button();
@@ -254,7 +254,7 @@
             // 
             // groupBox_create_list
             // 
-            groupBox_create_list.Controls.Add(richTextBox_products);
+            groupBox_create_list.Controls.Add(listBox_products);
             groupBox_create_list.Controls.Add(comboBox_lists);
             groupBox_create_list.Controls.Add(button_remove_product_from_list);
             groupBox_create_list.Controls.Add(button_add_product_to_list);
@@ -272,14 +272,15 @@
             groupBox_create_list.TabStop = false;
             groupBox_create_list.Text = "Einkaufslisten Anlegen";
             // 
-            // richTextBox_products
+            // listBox_products
             // 
-            richTextBox_products.Enabled = false;
-            richTextBox_products.Location = new Point(262, 108);
-            richTextBox_products.Name = "richTextBox_products";
-            richTextBox_products.Size = new Size(232, 178);
-            richTextBox_products.TabIndex = 14;
-            richTextBox_products.Text = "";
+            listBox_products.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            listBox_products.FormattingEnabled = true;
+            listBox_products.ItemHeight = 21;
+            listBox_products.Location = new Point(262, 108);
+            listBox_products.Name = "listBox_products";
+            listBox_products.Size = new Size(232, 151);
+            listBox_products.TabIndex = 14;
             // 
             // comboBox_lists
             // 
@@ -290,6 +291,7 @@
             comboBox_lists.Name = "comboBox_lists";
             comboBox_lists.Size = new Size(232, 29);
             comboBox_lists.TabIndex = 13;
+            comboBox_lists.SelectedIndexChanged += comboBox_lists_SelectedIndexChanged;
             // 
             // button_remove_product_from_list
             // 
@@ -299,6 +301,7 @@
             button_remove_product_from_list.Size = new Size(232, 28);
             button_remove_product_from_list.TabIndex = 12;
             button_remove_product_from_list.Text = "Produkt aus Liste entfernen";
+            button_remove_product_from_list.Click += button_remove_product_from_list_Click;
             // 
             // button_add_product_to_list
             // 
@@ -308,6 +311,7 @@
             button_add_product_to_list.Size = new Size(232, 28);
             button_add_product_to_list.TabIndex = 11;
             button_add_product_to_list.Text = "Produkt zu Liste hinzufügen";
+            button_add_product_to_list.Click += button_add_product_to_list_Click;
             // 
             // textBox_product_name
             // 
@@ -471,7 +475,7 @@
         private RichTextBox richTextBox_bill;
         private Button button_remove_product_from_list;
         private Button button_add_product_to_list;
-        private RichTextBox richTextBox_products;
         private ComboBox comboBox_lists;
+        private ListBox listBox_products;
     }
 }

@@ -33,6 +33,7 @@ namespace SchnaeppchenJaeger
             UpdateUIForMode();
 
             PopulateShoppingListComboBox();
+            comboBox_lists.SelectedIndexChanged += comboBox_lists_SelectedIndexChanged;
         }
 
         private async void button_test_Click(object sender, EventArgs e)
@@ -125,11 +126,31 @@ namespace SchnaeppchenJaeger
         private void PopulateShoppingListComboBox()
         {
             comboBox_lists.Items.Clear();
+            comboBox_db_shopping_lists.Items.Clear();
+
             List<string> tableNames = _dbHelper.GetShoppingListTables();
-            comboBox_lists.Items.AddRange(tableNames.ToArray());
-            comboBox_lists.SelectedIndex = 0;
+
+            if (tableNames.Any())
+            {
+                comboBox_db_shopping_lists.Items.AddRange(tableNames.ToArray());
+                comboBox_db_shopping_lists.SelectedIndex = 0;
+
+                comboBox_lists.Items.AddRange(tableNames.ToArray());
+                comboBox_lists.SelectedIndex = 0;
+            }
         }
 
+        private void PopulateProductListbox()
+        {
+            listBox_products.Items.Clear();
+
+            if (comboBox_lists.SelectedIndex != -1)
+            {
+                string tableName = comboBox_lists.SelectedItem.ToString();
+                List<string> products = _dbHelper.GetAllProductsFromShoppingList(tableName);
+                listBox_products.Items.AddRange(products.ToArray());
+            }
+        }
 
         #endregion
 
@@ -144,6 +165,7 @@ namespace SchnaeppchenJaeger
             _dbHelper.CreateShoppingListTable(tableName);
 
             PopulateShoppingListComboBox();
+            textBox_list_name.Clear();
         }
 
         private void button_delete_list_Click(object sender, EventArgs e)
@@ -155,6 +177,66 @@ namespace SchnaeppchenJaeger
 
                 PopulateShoppingListComboBox();
             }
+
+            textBox_list_name.Clear();
+        }
+
+        private void button_add_product_to_list_Click(object sender, EventArgs e)
+        {
+            if (comboBox_lists.SelectedIndex != -1)
+            {
+                string tableName = comboBox_lists.SelectedItem.ToString();
+                string productName = textBox_product_name.Text.Trim();
+
+                if (!string.IsNullOrWhiteSpace(productName))
+                {
+                    _dbHelper.InsertItemIntoShoppingList(tableName, productName);
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a product name.");
+                }
+
+                PopulateProductListbox();
+
+                textBox_product_name.Clear();
+            }
+            else
+            {
+                MessageBox.Show("Please select a shopping list.");
+            }
+        }
+
+        private void button_remove_product_from_list_Click(object sender, EventArgs e)
+        {
+            if (comboBox_lists.SelectedIndex != -1 &&
+                listBox_products.SelectedIndex != -1)
+            {
+                string tableName = comboBox_lists.SelectedItem.ToString();
+                string productName = listBox_products.SelectedItem.ToString();
+
+                if (!string.IsNullOrWhiteSpace(productName))
+                {
+                    _dbHelper.RemoveItemFromShoppingList(tableName, productName);
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a product name.");
+                }
+
+                PopulateProductListbox();
+
+                textBox_product_name.Clear();
+            }
+            else
+            {
+                MessageBox.Show("Please select a shopping list.");
+            }
+        }
+
+        private void comboBox_lists_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PopulateProductListbox();
         }
     }
 }
