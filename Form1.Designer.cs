@@ -57,7 +57,7 @@
             button_create_list = new Button();
             label_list_name = new Label();
             groupBox1 = new GroupBox();
-            label2 = new Label();
+            label_db_status = new Label();
             groupBox_bill = new GroupBox();
             richTextBox_bill = new RichTextBox();
             groupBox_modus.SuspendLayout();
@@ -365,7 +365,7 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(label2);
+            groupBox1.Controls.Add(label_db_status);
             groupBox1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             groupBox1.Location = new Point(378, 112);
             groupBox1.Name = "groupBox1";
@@ -374,16 +374,16 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Status";
             // 
-            // label2
+            // label_db_status
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.Red;
-            label2.Location = new Point(12, 35);
-            label2.Name = "label2";
-            label2.Size = new Size(103, 21);
-            label2.TabIndex = 9;
-            label2.Text = "Disconnected";
+            label_db_status.AutoSize = true;
+            label_db_status.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label_db_status.ForeColor = Color.Red;
+            label_db_status.Location = new Point(12, 35);
+            label_db_status.Name = "label_db_status";
+            label_db_status.Size = new Size(103, 21);
+            label_db_status.TabIndex = 9;
+            label_db_status.Text = "Disconnected";
             // 
             // groupBox_bill
             // 
@@ -464,7 +464,7 @@
         private TextBox textBox_product_name;
         private Label label_product_name;
         private GroupBox groupBox1;
-        private Label label2;
+        private Label label_db_status;
         private GroupBox groupBox_bill;
         private RichTextBox richTextBox_bill;
         private Button button_remove_product_from_list;

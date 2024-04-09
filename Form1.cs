@@ -1,12 +1,14 @@
 using SchnaeppchenJaeger.Client;
-using System;
+using SchnaeppchenJaeger.Database;
 
 namespace SchnaeppchenJaeger
 {
     public partial class Form1 : Form
     {
+        private DatabaseHelper _dbHelper;
         private readonly CancellationTokenSource _cancellationTokenSource;
         private Mode _currentMode = Mode.Manual;
+        private Status_DB _statusDB = Status_DB.Disconnected;
 
         private enum Mode
         {
@@ -14,9 +16,18 @@ namespace SchnaeppchenJaeger
             Automatic
         }
 
+        private enum Status_DB
+        {
+            Connected,
+            Disconnected
+        }
+
         public Form1()
         {
             InitializeComponent();
+
+            _dbHelper = DatabaseHelper.Instance;
+            UpdateDatabaseConnectionStatus();
 
             _cancellationTokenSource = new CancellationTokenSource();
             UpdateUIForMode();
@@ -41,6 +52,23 @@ namespace SchnaeppchenJaeger
         }
 
         #region Helper Methods
+
+        private void UpdateDatabaseConnectionStatus()
+        {
+            if (_dbHelper.IsDatabaseConnected())
+            {
+                _statusDB = Status_DB.Connected;
+                label_db_status.Text = "Connected";
+                label_db_status.ForeColor = Color.Green;
+            }
+            else
+            {
+                _statusDB = Status_DB.Disconnected;
+                label_db_status.Text = "Disconnected";
+                label_db_status.ForeColor = Color.Red;
+            }
+        }
+
 
         private void ToggleMode()
         {

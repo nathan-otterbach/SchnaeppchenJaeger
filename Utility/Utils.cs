@@ -2,8 +2,16 @@
 
 namespace SchnaeppchenJaeger.Utils
 {
+    /// <summary>
+    /// Utility class for common operations.
+    /// </summary>
     public class Utils
     {
+        /// <summary>
+        /// Extracts properties from the response content and populates them into a dictionary.
+        /// </summary>
+        /// <param name="response">The HTTP response message containing the content.</param>
+        /// <returns>A dictionary containing extracted properties.</returns>
         public Dictionary<string, string> GetPropertiesFromResponse(HttpResponseMessage response)
         {
             var settings = new JsonSerializerSettings
@@ -13,7 +21,7 @@ namespace SchnaeppchenJaeger.Utils
             };
 
             var contents = response.Content.ReadAsStringAsync().Result;
-            dynamic root = JsonConvert.DeserializeObject<DTO.DTO.Root>(contents, settings)!;
+            dynamic root = JsonConvert.DeserializeObject(contents, settings)!;
 
             var populatedData = new Dictionary<string, string>();
 
@@ -32,6 +40,11 @@ namespace SchnaeppchenJaeger.Utils
             return populatedData;
         }
 
+        /// <summary>
+        /// Reverses the characters in a string.
+        /// </summary>
+        /// <param name="s">The string to reverse.</param>
+        /// <returns>The reversed string.</returns>
         public unsafe string Reverse(string s)
         {
             if (string.IsNullOrEmpty(s))
