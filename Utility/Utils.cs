@@ -25,6 +25,8 @@ namespace SchnaeppchenJaeger.Utils
 
             var populatedData = new Dictionary<string, string>();
 
+
+
             for (int i = 0; i < root.results.Count; i++)
             {
                 populatedData[$"AdvertiserName_{i}"] = root.results[i].advertisers[0].name;

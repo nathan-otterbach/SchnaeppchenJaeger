@@ -246,7 +246,6 @@
             checkedListBox_select_shop.CheckOnClick = true;
             checkedListBox_select_shop.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             checkedListBox_select_shop.FormattingEnabled = true;
-            checkedListBox_select_shop.Items.AddRange(new object[] { "ALDI SÜD", "EDEKA", "Kaufland", "Lidl", "Netto Marken-Discount", "PENNY", "REWE" });
             checkedListBox_select_shop.Location = new Point(11, 37);
             checkedListBox_select_shop.Name = "checkedListBox_select_shop";
             checkedListBox_select_shop.Size = new Size(238, 170);

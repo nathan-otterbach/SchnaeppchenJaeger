@@ -34,6 +34,33 @@ namespace SchnaeppchenJaeger
 
             PopulateShoppingListComboBox();
             comboBox_lists.SelectedIndexChanged += comboBox_lists_SelectedIndexChanged;
+
+
+            checkedListBox_select_shop.Items.AddRange(new string[]
+            {
+                "Aldi",
+                "Lidl",
+                "Rewe",
+                "Edeka",
+                "Netto",
+                "Penny",
+                "Kaufland"
+            });
+        }
+
+        public List<string> GetSelectedShops()
+        {
+            List<string> selectedShops = new List<string>();
+
+            for (int i = 0; i < checkedListBox_select_shop.Items.Count; i++)
+            {
+                if (checkedListBox_select_shop.GetItemChecked(i))
+                {
+                    selectedShops.Add(checkedListBox_select_shop.Items[i].ToString());
+                }
+            }
+            
+            return selectedShops;
         }
 
         private async void button_test_Click(object sender, EventArgs e)
@@ -156,7 +183,7 @@ namespace SchnaeppchenJaeger
 
         private async void button_search_automatic_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show(GetSelectedShops().ToString());
         }
 
         private void button_create_list_Click(object sender, EventArgs e)
