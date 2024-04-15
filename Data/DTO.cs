@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 #pragma warning disable 8618
 
-namespace SchnaeppchenJaeger.DTO
+namespace SchnaeppchenJaeger.Data
 {
     public class DTO
     {

@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Net.Http.Headers;
 using Polly;
 using Polly.Retry;
+using SchnaeppchenJaeger.Utility;
 
 namespace SchnaeppchenJaeger.Client
 {
@@ -15,7 +16,6 @@ namespace SchnaeppchenJaeger.Client
         private bool _disposed = false;
         private readonly HttpClient _httpClient;
         private AsyncRetryPolicy<HttpResponseMessage> _retryPolicy;
-        private Utils.Utils _utils;
 
         private uint _zipCode;
         private string _querySearch;
@@ -41,7 +41,6 @@ namespace SchnaeppchenJaeger.Client
             _retryPolicy = Policy.HandleResult<HttpResponseMessage>(response => !response.IsSuccessStatusCode)
                                  .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromSeconds(5),
                                  (response, timeSpan, retryCount, context) => { });
-            _utils = new Utils.Utils();
         }
 
         /// <summary>
@@ -67,7 +66,7 @@ namespace SchnaeppchenJaeger.Client
             response.EnsureSuccessStatusCode();
             cancellationToken.ThrowIfCancellationRequested();
 
-            if (!_utils.GetPropertiesFromResponse(response).Any())
+            if (!Program._utils.GetPropertiesFromResponse(response).Any())
             {
                 return Status.Failure;
             }

@@ -1,5 +1,6 @@
 using SchnaeppchenJaeger.Client;
 using SchnaeppchenJaeger.Database;
+using SchnaeppchenJaeger.Utility;
 
 namespace SchnaeppchenJaeger
 {
@@ -48,28 +49,23 @@ namespace SchnaeppchenJaeger
             });
         }
 
-        public List<string> GetSelectedShops()
+        // use method before get property method, so we update the list of selected shops
+        private void GetSelectedShops()
         {
-            List<string> selectedShops = new List<string>();
-
             for (int i = 0; i < checkedListBox_select_shop.Items.Count; i++)
             {
                 if (checkedListBox_select_shop.GetItemChecked(i))
                 {
-                    selectedShops.Add(checkedListBox_select_shop.Items[i].ToString());
+                    Program._utils.selectedShops.Add(checkedListBox_select_shop.Items[i].ToString());
                 }
             }
-            
-            return selectedShops;
         }
 
         private async void button_test_Click(object sender, EventArgs e)
         {
-            // grab zip from user input
-            // grab search term from user input or sql database
-            var searchTerm = textBox_product.Text; // Example: Fetch search term from a text box
+            GetSelectedShops();
 
-            using (var client = new ApiClient(74564, "coca cola"))
+            using (var client = new ApiClient(Convert.ToUInt32(textBox_zipCode.Text.Trim()), textBox_product.Text.Trim()))
             {
                 await client.GetOffersAsync(_cancellationTokenSource.Token);
             }
@@ -183,7 +179,7 @@ namespace SchnaeppchenJaeger
 
         private async void button_search_automatic_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(GetSelectedShops().ToString());
+
         }
 
         private void button_create_list_Click(object sender, EventArgs e)

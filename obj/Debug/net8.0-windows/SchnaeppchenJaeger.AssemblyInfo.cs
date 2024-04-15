@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SchnaeppchenJaeger")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2fba58c24e9b2212b8666643a1850bf19e320119")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+be7f5e17b7dc9a106cfbc2629d2b405f590a8d86")]
 [assembly: System.Reflection.AssemblyProductAttribute("SchnaeppchenJaeger")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SchnaeppchenJaeger")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
