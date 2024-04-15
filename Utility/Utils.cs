@@ -96,7 +96,6 @@ namespace SchnaeppchenJaeger.Utility
             }
         }
 
-
         /// <summary>
         /// Reverses the characters in a string.
         /// </summary>

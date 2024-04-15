@@ -1,6 +1,7 @@
 using SchnaeppchenJaeger.Client;
 using SchnaeppchenJaeger.Database;
 using SchnaeppchenJaeger.Utility;
+using System.Configuration;
 using System.Windows.Forms;
 
 namespace SchnaeppchenJaeger
@@ -37,7 +38,6 @@ namespace SchnaeppchenJaeger
             PopulateShoppingListComboBox();
             comboBox_lists.SelectedIndexChanged += comboBox_lists_SelectedIndexChanged;
 
-
             checkedListBox_select_shop.Items.AddRange(new string[]
             {
                 "Aldi",
@@ -48,6 +48,9 @@ namespace SchnaeppchenJaeger
                 "Penny",
                 "Rewe"
             });
+            LoadSelectedShops();
+
+            FormClosing += Form1_FormClosing;
         }
 
         // use method before get property method, so we update the list of selected shops
@@ -187,6 +190,45 @@ namespace SchnaeppchenJaeger
             }
         }
 
+        private void LoadSelectedShops()
+        {
+            string selectedShops = ConfigurationManager.AppSettings["SelectedShops"];
+            string zipCode = ConfigurationManager.AppSettings["ZipCode"];
+
+            if (!string.IsNullOrEmpty(selectedShops))
+            {
+                string[] selectedShopArray = selectedShops.Split(',');
+
+                foreach (string shop in selectedShopArray)
+                {
+                    int index = checkedListBox_select_shop.Items.IndexOf(shop);
+                    if (index != -1)
+                    {
+                        checkedListBox_select_shop.SetItemChecked(index, true);
+                    }
+                }
+            }
+
+            textBox_zipCode.Text = zipCode;
+        }
+
+        private void SaveSelectedShops()
+        {
+            List<string> selectedShops = new List<string>();
+
+            foreach (var shop in checkedListBox_select_shop.CheckedItems)
+            {
+                selectedShops.Add(shop.ToString());
+            }
+
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings["SelectedShops"].Value = string.Join(",", selectedShops);
+            config.AppSettings.Settings["ZipCode"].Value = textBox_zipCode.Text.Trim();
+            config.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection("appSettings");
+        }
+
+
         #endregion
 
         private async void button_search_automatic_Click(object sender, EventArgs e)
@@ -272,6 +314,11 @@ namespace SchnaeppchenJaeger
         private void comboBox_lists_SelectedIndexChanged(object sender, EventArgs e)
         {
             PopulateProductListbox();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveSelectedShops();
         }
     }
 }

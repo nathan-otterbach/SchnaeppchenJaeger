@@ -235,7 +235,7 @@
             groupBox_select_shop.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             groupBox_select_shop.Location = new Point(518, 12);
             groupBox_select_shop.Name = "groupBox_select_shop";
-            groupBox_select_shop.Size = new Size(259, 221);
+            groupBox_select_shop.Size = new Size(304, 221);
             groupBox_select_shop.TabIndex = 10;
             groupBox_select_shop.TabStop = false;
             groupBox_select_shop.Text = "Einkaufsladen auswaehlen";
@@ -248,7 +248,7 @@
             checkedListBox_select_shop.FormattingEnabled = true;
             checkedListBox_select_shop.Location = new Point(11, 37);
             checkedListBox_select_shop.Name = "checkedListBox_select_shop";
-            checkedListBox_select_shop.Size = new Size(238, 170);
+            checkedListBox_select_shop.Size = new Size(287, 170);
             checkedListBox_select_shop.TabIndex = 0;
             // 
             // groupBox_create_list
@@ -396,7 +396,7 @@
             groupBox_bill.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             groupBox_bill.Location = new Point(518, 239);
             groupBox_bill.Name = "groupBox_bill";
-            groupBox_bill.Size = new Size(259, 310);
+            groupBox_bill.Size = new Size(304, 310);
             groupBox_bill.TabIndex = 13;
             groupBox_bill.TabStop = false;
             groupBox_bill.Text = "Rechnung";
@@ -408,7 +408,7 @@
             richTextBox_bill.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             richTextBox_bill.Location = new Point(11, 32);
             richTextBox_bill.Name = "richTextBox_bill";
-            richTextBox_bill.Size = new Size(238, 272);
+            richTextBox_bill.Size = new Size(287, 272);
             richTextBox_bill.TabIndex = 0;
             richTextBox_bill.Text = "";
             // 
@@ -416,7 +416,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(789, 561);
+            ClientSize = new Size(834, 561);
             Controls.Add(groupBox_bill);
             Controls.Add(groupBox1);
             Controls.Add(groupBox_create_list);
