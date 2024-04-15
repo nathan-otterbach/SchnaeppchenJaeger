@@ -1,6 +1,7 @@
 using SchnaeppchenJaeger.Client;
 using SchnaeppchenJaeger.Database;
 using SchnaeppchenJaeger.Utility;
+using System.Windows.Forms;
 
 namespace SchnaeppchenJaeger
 {
@@ -40,12 +41,12 @@ namespace SchnaeppchenJaeger
             checkedListBox_select_shop.Items.AddRange(new string[]
             {
                 "Aldi",
-                "Lidl",
-                "Rewe",
                 "Edeka",
+                "Kaufland",
+                "Lidl",
                 "Netto",
                 "Penny",
-                "Kaufland"
+                "Rewe"
             });
         }
 
@@ -68,6 +69,17 @@ namespace SchnaeppchenJaeger
             using (var client = new ApiClient(Convert.ToUInt32(textBox_zipCode.Text.Trim()), textBox_product.Text.Trim()))
             {
                 await client.GetOffersAsync(_cancellationTokenSource.Token);
+            }
+
+            richTextBox_bill.Clear();
+
+            foreach (var entry in Program._utils.populatedData)
+            {
+                // Format the text as desired
+                string formattedText = $"{entry.Key}: {entry.Value}\n";
+
+                // Add the formatted text to the RichTextBox
+                richTextBox_bill.AppendText(formattedText);
             }
         }
 

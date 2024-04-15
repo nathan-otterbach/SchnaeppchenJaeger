@@ -8,6 +8,7 @@ namespace SchnaeppchenJaeger.Utility
     public class Utils
     {
         public List<string> selectedShops = new List<string>();
+        public Dictionary<string, string> populatedData = new Dictionary<string, string>();
 
         /// <summary>
         /// Extracts properties from the response content and populates them into a dictionary.
@@ -24,7 +25,6 @@ namespace SchnaeppchenJaeger.Utility
 
             var contents = response.Content.ReadAsStringAsync().Result;
             dynamic root = JsonConvert.DeserializeObject(contents, settings)!;
-            var populatedData = new Dictionary<string, string>();
 
             for (int i = 0; i < root.results.Count; i++)
             {
@@ -42,8 +42,60 @@ namespace SchnaeppchenJaeger.Utility
                 }
             }
 
+            KeepCheapestEntries(populatedData);
+
             return populatedData;
         }
+
+        public void KeepCheapestEntries(Dictionary<string, string> populatedData)
+        {
+            // Create a list to store KeyValuePair of referencePrice and corresponding key
+            var referencePrices = new List<KeyValuePair<decimal, int>>();
+
+            // Iterate through populatedData to extract reference prices
+            foreach (var entry in populatedData)
+            {
+                if (entry.Key.StartsWith("ReferencePrice_") && decimal.TryParse(entry.Value, out decimal price))
+                {
+                    // Extract the index from the key
+                    int index = int.Parse(entry.Key.Substring("ReferencePrice_".Length));
+
+                    referencePrices.Add(new KeyValuePair<decimal, int>(price, index));
+                }
+            }
+
+            // Sort referencePrices by price
+            referencePrices.Sort((x, y) => x.Key.CompareTo(y.Key));
+
+            // Keep only the two cheapest entries
+            var cheapestIndices = referencePrices.Take(2).Select(pair => pair.Value).ToList();
+
+            // Create a new dictionary to store the cheapest entries
+            var cheapestEntries = new Dictionary<string, string>();
+
+            // Copy all information for the cheapest entries to the new dictionary
+            foreach (var index in cheapestIndices)
+            {
+                foreach (var entry in populatedData)
+                {
+                    // Check if the key contains the index
+                    if (entry.Key.Contains($"_{index}"))
+                    {
+                        cheapestEntries[entry.Key] = entry.Value;
+                    }
+                }
+            }
+
+            // Clear the original populatedData
+            populatedData.Clear();
+
+            // Copy back the cheapest entries to the original populatedData
+            foreach (var entry in cheapestEntries)
+            {
+                populatedData[entry.Key] = entry.Value;
+            }
+        }
+
 
         /// <summary>
         /// Reverses the characters in a string.
