@@ -48,7 +48,7 @@ namespace SchnaeppchenJaeger
                 "Penny",
                 "Rewe"
             });
-            LoadSelectedShops();
+            Load();
 
             FormClosing += Form1_FormClosing;
         }
@@ -190,7 +190,7 @@ namespace SchnaeppchenJaeger
             }
         }
 
-        private void LoadSelectedShops()
+        private void Load()
         {
             string selectedShops = ConfigurationManager.AppSettings["SelectedShops"];
             string zipCode = ConfigurationManager.AppSettings["ZipCode"];
@@ -212,7 +212,7 @@ namespace SchnaeppchenJaeger
             textBox_zipCode.Text = zipCode;
         }
 
-        private void SaveSelectedShops()
+        private void Save()
         {
             List<string> selectedShops = new List<string>();
 
@@ -318,7 +318,7 @@ namespace SchnaeppchenJaeger
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            SaveSelectedShops();
+            Save();
         }
     }
 }
