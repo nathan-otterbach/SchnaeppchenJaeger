@@ -29,7 +29,6 @@ namespace SchnaeppchenJaeger.Utility
             for (int i = 0; i < root.results.Count; i++)
             {
                 string advertiserName = root.results[i].advertisers[0].name;
-
                 if (selectedShops.Any(shop => advertiserName.ToLower().Contains(shop.ToLower())))
                 {
                     populatedData[$"AdvertiserName_{i}"] = root.results[i].advertisers[0].name;

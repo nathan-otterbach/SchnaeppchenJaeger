@@ -76,12 +76,13 @@ namespace SchnaeppchenJaeger
                 await client.GetOffersAsync(_cancellationTokenSource.Token);
             }
 
-            foreach (var entry in Program._utils.populatedData)
-            {
-                // Format the text as desired
-                string formattedText = $"{entry.Key}: {entry.Value}\n";
+            string formattedText = string.Empty;
 
-                // Add the formatted text to the RichTextBox
+            for (int i = 0; i < Program._utils.populatedData.Count; i++)
+            {
+
+                formattedText = $"{Program._utils.populatedData.ElementAt(i).Value}\n";
+
                 richTextBox_bill.AppendText(formattedText);
             }
         }
