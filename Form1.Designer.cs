@@ -404,10 +404,11 @@
             // richTextBox_bill
             // 
             richTextBox_bill.BorderStyle = BorderStyle.FixedSingle;
-            richTextBox_bill.Enabled = false;
-            richTextBox_bill.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            richTextBox_bill.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             richTextBox_bill.Location = new Point(11, 32);
             richTextBox_bill.Name = "richTextBox_bill";
+            richTextBox_bill.ReadOnly = true;
+            richTextBox_bill.ScrollBars = RichTextBoxScrollBars.Vertical;
             richTextBox_bill.Size = new Size(287, 272);
             richTextBox_bill.TabIndex = 0;
             richTextBox_bill.Text = "";

@@ -45,8 +45,8 @@ namespace SchnaeppchenJaeger
                 "Kaufland",
                 "Lidl",
                 "Netto",
-                "Penny",
-                "Rewe"
+                "PENNY",
+                "REWE"
             });
             Load();
 
@@ -68,13 +68,13 @@ namespace SchnaeppchenJaeger
         private async void button_test_Click(object sender, EventArgs e)
         {
             GetSelectedShops();
+            richTextBox_bill.Clear();
+            Program._utils.populatedData.Clear();
 
             using (var client = new ApiClient(Convert.ToUInt32(textBox_zipCode.Text.Trim()), textBox_product.Text.Trim()))
             {
                 await client.GetOffersAsync(_cancellationTokenSource.Token);
             }
-
-            richTextBox_bill.Clear();
 
             foreach (var entry in Program._utils.populatedData)
             {

@@ -29,7 +29,8 @@ namespace SchnaeppchenJaeger.Utility
             for (int i = 0; i < root.results.Count; i++)
             {
                 string advertiserName = root.results[i].advertisers[0].name;
-                if (selectedShops.Any(shop => shop.ToLower() == advertiserName.ToLower()))
+
+                if (selectedShops.Any(shop => advertiserName.ToLower().Contains(shop.ToLower())))
                 {
                     populatedData[$"AdvertiserName_{i}"] = root.results[i].advertisers[0].name;
                     populatedData[$"Description_{i}"] = root.results[i].description;
@@ -47,6 +48,7 @@ namespace SchnaeppchenJaeger.Utility
             return populatedData;
         }
 
+        // passt nicht
         public void KeepCheapestEntries(Dictionary<string, string> populatedData)
         {
             // Create a list to store KeyValuePair of referencePrice and corresponding key
