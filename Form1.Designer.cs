@@ -39,6 +39,8 @@
             groupBox_modus_manual = new GroupBox();
             button_cancel_manual = new Button();
             groupBox_modus_automatic = new GroupBox();
+            textBox_zipCode_automatic = new TextBox();
+            label2 = new Label();
             button_cancel_automatic = new Button();
             button_search_automatic = new Button();
             label1 = new Label();
@@ -90,9 +92,9 @@
             // textBox_product
             // 
             textBox_product.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox_product.Location = new Point(194, 61);
+            textBox_product.Location = new Point(122, 61);
             textBox_product.Name = "textBox_product";
-            textBox_product.Size = new Size(153, 29);
+            textBox_product.Size = new Size(332, 29);
             textBox_product.TabIndex = 2;
             // 
             // label_PLZ
@@ -109,7 +111,7 @@
             // 
             label_product.AutoSize = true;
             label_product.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label_product.Location = new Point(194, 37);
+            label_product.Location = new Point(122, 37);
             label_product.Name = "label_product";
             label_product.Size = new Size(65, 21);
             label_product.TabIndex = 4;
@@ -132,7 +134,7 @@
             groupBox_modus.Controls.Add(label_modus_indicator);
             groupBox_modus.Controls.Add(checkBox_modus);
             groupBox_modus.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            groupBox_modus.Location = new Point(378, 12);
+            groupBox_modus.Location = new Point(478, 12);
             groupBox_modus.Name = "groupBox_modus";
             groupBox_modus.Size = new Size(134, 94);
             groupBox_modus.TabIndex = 7;
@@ -161,7 +163,7 @@
             groupBox_modus_manual.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             groupBox_modus_manual.Location = new Point(12, 12);
             groupBox_modus_manual.Name = "groupBox_modus_manual";
-            groupBox_modus_manual.Size = new Size(360, 171);
+            groupBox_modus_manual.Size = new Size(460, 171);
             groupBox_modus_manual.TabIndex = 8;
             groupBox_modus_manual.TabStop = false;
             groupBox_modus_manual.Text = "Paramater Suche";
@@ -169,7 +171,7 @@
             // button_cancel_manual
             // 
             button_cancel_manual.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button_cancel_manual.Location = new Point(194, 131);
+            button_cancel_manual.Location = new Point(293, 131);
             button_cancel_manual.Name = "button_cancel_manual";
             button_cancel_manual.Size = new Size(153, 28);
             button_cancel_manual.TabIndex = 5;
@@ -177,6 +179,8 @@
             // 
             // groupBox_modus_automatic
             // 
+            groupBox_modus_automatic.Controls.Add(textBox_zipCode_automatic);
+            groupBox_modus_automatic.Controls.Add(label2);
             groupBox_modus_automatic.Controls.Add(button_cancel_automatic);
             groupBox_modus_automatic.Controls.Add(button_search_automatic);
             groupBox_modus_automatic.Controls.Add(label1);
@@ -184,16 +188,34 @@
             groupBox_modus_automatic.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             groupBox_modus_automatic.Location = new Point(12, 12);
             groupBox_modus_automatic.Name = "groupBox_modus_automatic";
-            groupBox_modus_automatic.Size = new Size(360, 171);
+            groupBox_modus_automatic.Size = new Size(460, 171);
             groupBox_modus_automatic.TabIndex = 9;
             groupBox_modus_automatic.TabStop = false;
             groupBox_modus_automatic.Text = "Einkaufslisten Suche";
             groupBox_modus_automatic.Visible = false;
             // 
+            // textBox_zipCode_automatic
+            // 
+            textBox_zipCode_automatic.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox_zipCode_automatic.Location = new Point(15, 61);
+            textBox_zipCode_automatic.Name = "textBox_zipCode_automatic";
+            textBox_zipCode_automatic.Size = new Size(88, 29);
+            textBox_zipCode_automatic.TabIndex = 8;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(15, 37);
+            label2.Name = "label2";
+            label2.Size = new Size(88, 21);
+            label2.TabIndex = 9;
+            label2.Text = "Postleitzahl";
+            // 
             // button_cancel_automatic
             // 
             button_cancel_automatic.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button_cancel_automatic.Location = new Point(194, 131);
+            button_cancel_automatic.Location = new Point(290, 131);
             button_cancel_automatic.Name = "button_cancel_automatic";
             button_cancel_automatic.Size = new Size(153, 28);
             button_cancel_automatic.TabIndex = 7;
@@ -213,7 +235,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(15, 37);
+            label1.Location = new Point(122, 37);
             label1.Name = "label1";
             label1.Size = new Size(158, 21);
             label1.TabIndex = 1;
@@ -224,7 +246,7 @@
             comboBox_db_shopping_lists.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox_db_shopping_lists.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             comboBox_db_shopping_lists.FormattingEnabled = true;
-            comboBox_db_shopping_lists.Location = new Point(15, 63);
+            comboBox_db_shopping_lists.Location = new Point(122, 61);
             comboBox_db_shopping_lists.Name = "comboBox_db_shopping_lists";
             comboBox_db_shopping_lists.Size = new Size(332, 29);
             comboBox_db_shopping_lists.TabIndex = 0;
@@ -233,7 +255,7 @@
             // 
             groupBox_select_shop.Controls.Add(checkedListBox_select_shop);
             groupBox_select_shop.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            groupBox_select_shop.Location = new Point(518, 12);
+            groupBox_select_shop.Location = new Point(618, 12);
             groupBox_select_shop.Name = "groupBox_select_shop";
             groupBox_select_shop.Size = new Size(304, 221);
             groupBox_select_shop.TabIndex = 10;
@@ -372,7 +394,7 @@
             // 
             groupBox1.Controls.Add(label_db_status);
             groupBox1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            groupBox1.Location = new Point(378, 112);
+            groupBox1.Location = new Point(478, 112);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(134, 71);
             groupBox1.TabIndex = 12;
@@ -396,7 +418,7 @@
             groupBox_bill.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             groupBox_bill.Location = new Point(518, 239);
             groupBox_bill.Name = "groupBox_bill";
-            groupBox_bill.Size = new Size(304, 310);
+            groupBox_bill.Size = new Size(404, 310);
             groupBox_bill.TabIndex = 13;
             groupBox_bill.TabStop = false;
             groupBox_bill.Text = "Rechnung";
@@ -409,7 +431,7 @@
             richTextBox_bill.Name = "richTextBox_bill";
             richTextBox_bill.ReadOnly = true;
             richTextBox_bill.ScrollBars = RichTextBoxScrollBars.Vertical;
-            richTextBox_bill.Size = new Size(287, 272);
+            richTextBox_bill.Size = new Size(387, 272);
             richTextBox_bill.TabIndex = 0;
             richTextBox_bill.Text = "";
             // 
@@ -417,7 +439,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(834, 561);
+            ClientSize = new Size(934, 561);
             Controls.Add(groupBox_bill);
             Controls.Add(groupBox1);
             Controls.Add(groupBox_create_list);
@@ -477,5 +499,7 @@
         private Button button_add_product_to_list;
         private ComboBox comboBox_lists;
         private ListBox listBox_products;
+        private TextBox textBox_zipCode_automatic;
+        private Label label2;
     }
 }

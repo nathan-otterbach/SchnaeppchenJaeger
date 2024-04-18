@@ -76,14 +76,46 @@ namespace SchnaeppchenJaeger
                 await client.GetOffersAsync(_cancellationTokenSource.Token);
             }
 
-            string formattedText = string.Empty;
-
             for (int i = 0; i < Program._utils.populatedData.Count; i++)
             {
+                if (Program._utils.populatedData.ElementAt(i).Key.Contains("Price_") 
+                    && !Program._utils.populatedData.ElementAt(i).Key.Contains("ReferencePrice_"))
+                {
+                    string priceText = $"{Program._utils.populatedData.ElementAt(i).Value} €\n";
+                    richTextBox_bill.AppendText(priceText);
+                }
 
-                formattedText = $"{Program._utils.populatedData.ElementAt(i).Value}\n";
+                else if (Program._utils.populatedData.ElementAt(i).Key.Contains("ReferencePrice_"))
+                {
+                    string refrerencePriceText = $"{Program._utils.populatedData.ElementAt(i).Value} € pro ";
+                    richTextBox_bill.AppendText(refrerencePriceText);
+                }
 
-                richTextBox_bill.AppendText(formattedText);
+                else if (Program._utils.populatedData.ElementAt(i).Key.Contains("FromDate_"))
+                {
+                    string fromDateText = $"Gütltig von: {Program._utils.populatedData.ElementAt(i).Value} bis ";
+                    richTextBox_bill.AppendText(fromDateText);
+                }
+
+                else if (Program._utils.populatedData.ElementAt(i).Key.Contains("RequiresLoyaltyMembership_"))
+                {
+                    if (Program._utils.populatedData.ElementAt(i).Value.Equals("True", StringComparison.OrdinalIgnoreCase))
+                    {
+                        string requiresLoyaltyMembershipText = $"Kudenkarte benötigt\n\n";
+                        richTextBox_bill.AppendText(requiresLoyaltyMembershipText);
+                    }
+                    else
+                    {
+                        string requiresLoyaltyMembershipText = $"Kudenkarte nicht benötigt\n\n";
+                        richTextBox_bill.AppendText(requiresLoyaltyMembershipText);
+                    }
+                }
+
+                else
+                {
+                    string defaultText = $"{Program._utils.populatedData.ElementAt(i).Value}\n";
+                    richTextBox_bill.AppendText(defaultText);
+                }
             }
         }
 
@@ -211,6 +243,7 @@ namespace SchnaeppchenJaeger
             }
 
             textBox_zipCode.Text = zipCode;
+            textBox_zipCode_automatic.Text = zipCode;
         }
 
         private void Save()
