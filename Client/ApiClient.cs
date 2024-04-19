@@ -61,10 +61,11 @@ namespace SchnaeppchenJaeger.Client
         /// <returns>Status indicating whether the operation was successful or not.</returns>
         public async Task<Status> GetOffersAsync(CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             var response = await _retryPolicy.ExecuteAsync(() => _httpClient.GetAsync($"{ConfigurationManager.AppSettings["BaseUrl"]}q={QuerySearch}&zipCode={ZipCode}", cancellationToken));
 
             response.EnsureSuccessStatusCode();
-            cancellationToken.ThrowIfCancellationRequested();
 
             if (!Program._utils.GetPropertiesFromResponse(response).Any())
             {

@@ -69,7 +69,6 @@ namespace SchnaeppchenJaeger
             GetSelectedShops();
             richTextBox_bill.Clear();
             Program._utils.populatedData.Clear();
-
             _cancellationTokenSource = new CancellationTokenSource();
 
             using (var client = new ApiClient(Convert.ToUInt32(textBox_zipCode.Text.Trim()), textBox_product.Text.Trim()))
