@@ -79,7 +79,7 @@
             button_search_manual.Size = new Size(153, 28);
             button_search_manual.TabIndex = 0;
             button_search_manual.Text = "Suche starten";
-            button_search_manual.Click += button_test_Click;
+            button_search_manual.Click += button_search_manual_Click;
             // 
             // textBox_zipCode
             // 
@@ -176,6 +176,7 @@
             button_cancel_manual.Size = new Size(153, 28);
             button_cancel_manual.TabIndex = 5;
             button_cancel_manual.Text = "Suche abbrechen";
+            button_cancel_manual.Click += button_cancel_manual_Click;
             // 
             // groupBox_modus_automatic
             // 
@@ -215,7 +216,7 @@
             // button_cancel_automatic
             // 
             button_cancel_automatic.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button_cancel_automatic.Location = new Point(290, 131);
+            button_cancel_automatic.Location = new Point(293, 131);
             button_cancel_automatic.Name = "button_cancel_automatic";
             button_cancel_automatic.Size = new Size(153, 28);
             button_cancel_automatic.TabIndex = 7;

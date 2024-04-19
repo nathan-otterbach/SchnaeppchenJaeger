@@ -9,7 +9,7 @@ namespace SchnaeppchenJaeger
     public partial class Form1 : Form
     {
         private DatabaseHelper _dbHelper;
-        private readonly CancellationTokenSource _cancellationTokenSource;
+        private CancellationTokenSource _cancellationTokenSource;
         private Mode _currentMode = Mode.Manual;
         private Status_DB _statusDB = Status_DB.Disconnected;
 
@@ -32,7 +32,6 @@ namespace SchnaeppchenJaeger
             _dbHelper = DatabaseHelper.Instance;
             UpdateDatabaseConnectionStatus();
 
-            _cancellationTokenSource = new CancellationTokenSource();
             UpdateUIForMode();
 
             PopulateShoppingListComboBox();
@@ -65,11 +64,13 @@ namespace SchnaeppchenJaeger
             }
         }
 
-        private async void button_test_Click(object sender, EventArgs e)
+        private async void button_search_manual_Click(object sender, EventArgs e)
         {
             GetSelectedShops();
             richTextBox_bill.Clear();
             Program._utils.populatedData.Clear();
+
+            _cancellationTokenSource = new CancellationTokenSource();
 
             using (var client = new ApiClient(Convert.ToUInt32(textBox_zipCode.Text.Trim()), textBox_product.Text.Trim()))
             {
@@ -78,7 +79,7 @@ namespace SchnaeppchenJaeger
 
             for (int i = 0; i < Program._utils.populatedData.Count; i++)
             {
-                if (Program._utils.populatedData.ElementAt(i).Key.Contains("Price_") 
+                if (Program._utils.populatedData.ElementAt(i).Key.Contains("Price_")
                     && !Program._utils.populatedData.ElementAt(i).Key.Contains("ReferencePrice_"))
                 {
                     string priceText = $"{Program._utils.populatedData.ElementAt(i).Value} €\n";
@@ -353,6 +354,14 @@ namespace SchnaeppchenJaeger
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Save();
+        }
+
+        private void button_cancel_manual_Click(object sender, EventArgs e)
+        {
+            if (_cancellationTokenSource.Token.CanBeCanceled)
+            {
+                _cancellationTokenSource.Cancel();
+            }
         }
     }
 }
