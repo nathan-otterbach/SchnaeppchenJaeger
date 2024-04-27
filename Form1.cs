@@ -268,13 +268,14 @@ namespace SchnaeppchenJaeger
         {
             GetSelectedShops();
             richTextBox_bill.Clear();
-            Program._utils.populatedData.Clear();
             _cancellationTokenSource = new CancellationTokenSource();
 
-            // returns list of all products in shopping list
             _dbHelper.GetAllProductsFromShoppingList(comboBox_db_shopping_lists.SelectedItem.ToString());
 
-            MessageBox.Show(Program._utils.products.ToString());
+            for (int i = 0; i < Program._utils.products.Count; i++)
+            {
+                MessageBox.Show(Program._utils.products[i]);
+            }
         }
 
         private void button_create_list_Click(object sender, EventArgs e)
