@@ -267,7 +267,19 @@ namespace SchnaeppchenJaeger
 
         private async void button_search_automatic_Click(object sender, EventArgs e)
         {
+            GetSelectedShops();
+            richTextBox_bill.Clear();
+            Program._utils.populatedData.Clear();
+            _cancellationTokenSource = new CancellationTokenSource();
 
+            // returns list of all products in shopping list
+            _dbHelper.GetAllProductsFromShoppingList(comboBox_db_shopping_lists.SelectedItem.ToString());
+
+            // get elements of sqltable
+            //using (var client = new ApiClient(Convert.ToUInt32(textBox_zipCode.Text.Trim()), "get elements of sqltable"))
+            //{
+            //    await client.GetOffersAsync(_cancellationTokenSource.Token);
+            //}
         }
 
         private void button_create_list_Click(object sender, EventArgs e)
@@ -356,6 +368,14 @@ namespace SchnaeppchenJaeger
         }
 
         private void button_cancel_manual_Click(object sender, EventArgs e)
+        {
+            if (_cancellationTokenSource.Token.CanBeCanceled)
+            {
+                _cancellationTokenSource.Cancel();
+            }
+        }
+
+        private void button_cancel_automatic_Click(object sender, EventArgs e)
         {
             if (_cancellationTokenSource.Token.CanBeCanceled)
             {

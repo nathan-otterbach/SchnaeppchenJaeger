@@ -221,6 +221,7 @@
             button_cancel_automatic.Size = new Size(153, 28);
             button_cancel_automatic.TabIndex = 7;
             button_cancel_automatic.Text = "Suche abbrechen";
+            button_cancel_automatic.Click += button_cancel_automatic_Click;
             // 
             // button_search_automatic
             // 
