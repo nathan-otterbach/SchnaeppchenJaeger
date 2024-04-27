@@ -211,6 +211,7 @@ namespace SchnaeppchenJaeger.Database
         {
             try
             {
+                Program._utils.products.Clear();
                 string commandText = $@"SELECT ProductName FROM {tableName}";
 
                 using (var command = new SQLiteCommand(commandText, _connection))

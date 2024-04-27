@@ -218,8 +218,7 @@ namespace SchnaeppchenJaeger
             if (comboBox_lists.SelectedIndex != -1)
             {
                 string tableName = comboBox_lists.SelectedItem.ToString();
-                List<string> products = _dbHelper.GetAllProductsFromShoppingList(tableName);
-                listBox_products.Items.AddRange(products.ToArray());
+                listBox_products.Items.AddRange(_dbHelper.GetAllProductsFromShoppingList(tableName).ToArray());
             }
         }
 
