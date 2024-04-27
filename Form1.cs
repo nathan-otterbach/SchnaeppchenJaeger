@@ -265,7 +265,7 @@ namespace SchnaeppchenJaeger
 
         #endregion
 
-        private async void button_search_automatic_Click(object sender, EventArgs e)
+        private void button_search_automatic_Click(object sender, EventArgs e)
         {
             GetSelectedShops();
             richTextBox_bill.Clear();
@@ -275,11 +275,7 @@ namespace SchnaeppchenJaeger
             // returns list of all products in shopping list
             _dbHelper.GetAllProductsFromShoppingList(comboBox_db_shopping_lists.SelectedItem.ToString());
 
-            // get elements of sqltable
-            //using (var client = new ApiClient(Convert.ToUInt32(textBox_zipCode.Text.Trim()), "get elements of sqltable"))
-            //{
-            //    await client.GetOffersAsync(_cancellationTokenSource.Token);
-            //}
+            MessageBox.Show(Program._utils.products.ToString());
         }
 
         private void button_create_list_Click(object sender, EventArgs e)

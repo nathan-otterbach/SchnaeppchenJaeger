@@ -211,8 +211,6 @@ namespace SchnaeppchenJaeger.Database
         {
             try
             {
-                List<string> products = new List<string>();
-
                 string commandText = $@"SELECT ProductName FROM {tableName}";
 
                 using (var command = new SQLiteCommand(commandText, _connection))
@@ -221,12 +219,12 @@ namespace SchnaeppchenJaeger.Database
                     {
                         while (reader.Read())
                         {
-                            products.Add(reader["ProductName"].ToString());
+                            Program._utils.products.Add(reader["ProductName"].ToString());
                         }
                     }
                 }
-
-                return products;
+                
+                return Program._utils.products;
             }
             catch (Exception ex)
             {

@@ -7,6 +7,7 @@ namespace SchnaeppchenJaeger.Utility
     /// </summary>
     public class Utils
     {
+        public List<string> products = new List<string>();
         public List<string> selectedShops = new List<string>();
         public Dictionary<string, string> populatedData = new Dictionary<string, string>();
 
@@ -47,7 +48,6 @@ namespace SchnaeppchenJaeger.Utility
             return populatedData;
         }
 
-        // passt nicht
         public void KeepCheapestEntries(Dictionary<string, string> populatedData)
         {
             // Create a list to store KeyValuePair of referencePrice and corresponding key
