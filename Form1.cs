@@ -76,6 +76,7 @@ namespace SchnaeppchenJaeger
                 await client.GetOffersAsync(_cancellationTokenSource.Token);
             }
 
+            richTextBox_bill.AppendText($"{textBox_product.Text.ToUpper()}:\n\n");
             for (int i = 0; i < Program._utils.populatedData.Count; i++)
             {
                 if (Program._utils.populatedData.ElementAt(i).Key.Contains("Price_")
@@ -279,6 +280,7 @@ namespace SchnaeppchenJaeger
                     await client.GetOffersAsync(_cancellationTokenSource.Token);
                 }
 
+                richTextBox_bill.AppendText($"{Program._utils.products[i].ToUpper()}:\n\n");
                 for (int j = 0; j < Program._utils.populatedData.Count; j++)
                 {
                     if (Program._utils.populatedData.ElementAt(j).Key.Contains("Price_")
