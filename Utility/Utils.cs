@@ -96,37 +96,5 @@ namespace SchnaeppchenJaeger.Utility
                 populatedData[entry.Key] = entry.Value;
             }
         }
-
-        /// <summary>
-        /// Reverses the characters in a string.
-        /// </summary>
-        /// <param name="s">The string to reverse.</param>
-        /// <returns>The reversed string.</returns>
-        public unsafe string Reverse(string s)
-        {
-            if (string.IsNullOrEmpty(s))
-            {
-                return s;
-            }
-
-            char[] chars = s.ToCharArray();
-            fixed (char* p = chars)
-            {
-                int start = 0;
-                int end = chars.Length - 1;
-
-                while (start < end)
-                {
-                    char temp = p[start];
-                    p[start] = p[end];
-                    p[end] = temp;
-
-                    start++;
-                    end--;
-                }
-            }
-
-            return new string(chars);
-        }
     }
 }

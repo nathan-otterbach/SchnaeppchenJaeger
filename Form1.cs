@@ -264,17 +264,62 @@ namespace SchnaeppchenJaeger
 
         #endregion
 
-        private void button_search_automatic_Click(object sender, EventArgs e)
+        private async void button_search_automatic_Click(object sender, EventArgs e)
         {
             GetSelectedShops();
             richTextBox_bill.Clear();
+            Program._utils.populatedData.Clear();
             _cancellationTokenSource = new CancellationTokenSource();
 
             _dbHelper.GetAllProductsFromShoppingList(comboBox_db_shopping_lists.SelectedItem.ToString());
-
             for (int i = 0; i < Program._utils.products.Count; i++)
             {
-                MessageBox.Show(Program._utils.products[i]);
+                using (var client = new ApiClient(Convert.ToUInt32(textBox_zipCode.Text.Trim()), Program._utils.products[i]))
+                {
+                    await client.GetOffersAsync(_cancellationTokenSource.Token);
+                }
+
+                for (int j = 0; j < Program._utils.populatedData.Count; j++)
+                {
+                    if (Program._utils.populatedData.ElementAt(j).Key.Contains("Price_")
+                        && !Program._utils.populatedData.ElementAt(j).Key.Contains("ReferencePrice_"))
+                    {
+                        string priceText = $"{Program._utils.populatedData.ElementAt(j).Value} €\n";
+                        richTextBox_bill.AppendText(priceText);
+                    }
+
+                    else if (Program._utils.populatedData.ElementAt(j).Key.Contains("ReferencePrice_"))
+                    {
+                        string refrerencePriceText = $"{Program._utils.populatedData.ElementAt(j).Value} € pro ";
+                        richTextBox_bill.AppendText(refrerencePriceText);
+                    }
+
+                    else if (Program._utils.populatedData.ElementAt(j).Key.Contains("FromDate_"))
+                    {
+                        string fromDateText = $"Gütltig von: {Program._utils.populatedData.ElementAt(j).Value} bis ";
+                        richTextBox_bill.AppendText(fromDateText);
+                    }
+
+                    else if (Program._utils.populatedData.ElementAt(j).Key.Contains("RequiresLoyaltyMembership_"))
+                    {
+                        if (Program._utils.populatedData.ElementAt(j).Value.Equals("True", StringComparison.OrdinalIgnoreCase))
+                        {
+                            string requiresLoyaltyMembershipText = $"Kudenkarte benötigt\n\n";
+                            richTextBox_bill.AppendText(requiresLoyaltyMembershipText);
+                        }
+                        else
+                        {
+                            string requiresLoyaltyMembershipText = $"Kudenkarte nicht benötigt\n\n";
+                            richTextBox_bill.AppendText(requiresLoyaltyMembershipText);
+                        }
+                    }
+
+                    else
+                    {
+                        string defaultText = $"{Program._utils.populatedData.ElementAt(j).Value}\n";
+                        richTextBox_bill.AppendText(defaultText);
+                    }
+                }
             }
         }
 

@@ -1632,23 +1632,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\nathi\\.nuget\\packages\\": {},
+    "C:\\Users\\Nathan\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\nathi\\Documents\\GitHub\\SchnaeppchenJaeger\\SchnaeppchenJaeger.csproj",
+      "projectUniqueName": "C:\\Users\\Nathan\\source\\repos\\SchnaeppchenJaeger\\SchnaeppchenJaeger.csproj",
       "projectName": "SchnaeppchenJaeger",
-      "projectPath": "C:\\Users\\nathi\\Documents\\GitHub\\SchnaeppchenJaeger\\SchnaeppchenJaeger.csproj",
-      "packagesPath": "C:\\Users\\nathi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\nathi\\Documents\\GitHub\\SchnaeppchenJaeger\\obj\\",
+      "projectPath": "C:\\Users\\Nathan\\source\\repos\\SchnaeppchenJaeger\\SchnaeppchenJaeger.csproj",
+      "packagesPath": "C:\\Users\\Nathan\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Nathan\\source\\repos\\SchnaeppchenJaeger\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\nathi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Nathan\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
