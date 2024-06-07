@@ -423,7 +423,7 @@
             groupBox_bill.Size = new Size(404, 310);
             groupBox_bill.TabIndex = 13;
             groupBox_bill.TabStop = false;
-            groupBox_bill.Text = "Rechnung";
+            groupBox_bill.Text = "Resultat";
             // 
             // richTextBox_bill
             // 
