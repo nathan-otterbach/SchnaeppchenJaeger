@@ -3,10 +3,6 @@
   "WorkspaceRootPath": "C:\\Users\\Nathan\\source\\repos\\SchnaeppchenJaeger\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D272B765-775E-43FE-B11E-110960F2A0FC}|SchnaeppchenJaeger.csproj|c:\\users\\nathan\\source\\repos\\schnaeppchenjaeger\\client\\apiclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D272B765-775E-43FE-B11E-110960F2A0FC}|SchnaeppchenJaeger.csproj|solutionrelative:client\\apiclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D272B765-775E-43FE-B11E-110960F2A0FC}|SchnaeppchenJaeger.csproj|c:\\users\\nathan\\source\\repos\\schnaeppchenjaeger\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D272B765-775E-43FE-B11E-110960F2A0FC}|SchnaeppchenJaeger.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -26,24 +22,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ApiClient.cs",
-              "DocumentMoniker": "C:\\Users\\Nathan\\source\\repos\\SchnaeppchenJaeger\\Client\\ApiClient.cs",
-              "RelativeDocumentMoniker": "Client\\ApiClient.cs",
-              "ToolTip": "C:\\Users\\Nathan\\source\\repos\\SchnaeppchenJaeger\\Client\\ApiClient.cs",
-              "RelativeToolTip": "Client\\ApiClient.cs",
-              "ViewState": "AQIAAE4AAAAAAAAAAAAAAGUAAAAoAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-07T12:40:31.74Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "App.config",
               "DocumentMoniker": "C:\\Users\\Nathan\\source\\repos\\SchnaeppchenJaeger\\App.config",
               "RelativeDocumentMoniker": "App.config",
@@ -56,7 +39,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Nathan\\source\\repos\\SchnaeppchenJaeger\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
@@ -68,13 +51,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Form1.cs",
               "DocumentMoniker": "C:\\Users\\Nathan\\source\\repos\\SchnaeppchenJaeger\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "C:\\Users\\Nathan\\source\\repos\\SchnaeppchenJaeger\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AQIAANMAAAAAAAAAAAAYwOcAAAANAAAA",
+              "ViewState": "AQIAADoAAAAAAAAAAAAlwEIAAABRAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-27T13:21:55.224Z",
               "EditorCaption": ""
