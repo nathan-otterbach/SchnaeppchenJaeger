@@ -27,6 +27,11 @@ namespace SchnaeppchenJaeger
 
         public Form1()
         {
+            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+            Resize objFormResizer = new Resize();
+            objFormResizer.ResizeForm(this, screenHeight, screenWidth);
+
             InitializeComponent();
 
             _dbHelper = DatabaseHelper.Instance;
@@ -275,6 +280,7 @@ namespace SchnaeppchenJaeger
             _dbHelper.GetAllProductsFromShoppingList(comboBox_db_shopping_lists.SelectedItem.ToString());
             for (int i = 0; i < Program._utils.products.Count; i++)
             {
+                // append results to Shoppinglist List
                 using (var client = new ApiClient(Convert.ToUInt32(textBox_zipCode.Text.Trim()), Program._utils.products[i]))
                 {
                     await client.GetOffersAsync(_cancellationTokenSource.Token);
