@@ -1,4 +1,5 @@
 ﻿#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
 #pragma warning disable CS8604 // Possible null reference argument.
 #pragma warning disable CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate.
 
@@ -26,6 +27,8 @@ namespace SchnaeppchenJaeger.Utility
     {
         private readonly List<ControlBounds> originalControlBounds = new List<ControlBounds>();
         private readonly Size originalClientSize;
+        private float xRatio;
+        private float yRatio;
 
         /// <summary>
         /// Initializes a new instance of the Resizer class for a given Form.
@@ -62,7 +65,12 @@ namespace SchnaeppchenJaeger.Utility
         private void Form_Resize(object sender, EventArgs e)
         {
             Form form = sender as Form;
-            ResizeControls(form);
+            if (form != null)
+            {
+                xRatio = (float)form.ClientSize.Width / originalClientSize.Width;
+                yRatio = (float)form.ClientSize.Height / originalClientSize.Height;
+                ResizeControls(form);
+            }
         }
 
         /// <summary>
@@ -84,9 +92,6 @@ namespace SchnaeppchenJaeger.Utility
         /// <param name="parent">The parent control to resize controls for.</param>
         private void ResizeControls(Control parent)
         {
-            float xRatio = (float)parent.ClientSize.Width / originalClientSize.Width;
-            float yRatio = (float)parent.ClientSize.Height / originalClientSize.Height;
-
             foreach (Control ctrl in parent.Controls)
             {
                 // Find the original bounds entry for the control
@@ -101,8 +106,127 @@ namespace SchnaeppchenJaeger.Utility
                     ctrl.Bounds = new Rectangle(newX, newY, newWidth, newHeight);
                     ctrl.Font = new Font(ctrl.Font.FontFamily, original.OriginalFontSize * yRatio, ctrl.Font.Style);
 
-                    // Recursive call for child controls
-                    ResizeControls(ctrl);
+                    // Special handling for certain control types using a switch statement
+                    switch (ctrl)
+                    {
+                        case ComboBox comboBox:
+                            comboBox.DrawMode = DrawMode.OwnerDrawFixed;
+                            comboBox.DrawItem -= ComboBox_DrawItem; // Unsubscribe to avoid multiple subscriptions
+                            comboBox.DrawItem += ComboBox_DrawItem;
+                            comboBox.ItemHeight = (int)(original.OriginalFontSize * yRatio * 1.5); // Adjust item height as needed
+                            break;
+
+                        case CheckedListBox checkedListBox:
+                            checkedListBox.DrawMode = DrawMode.OwnerDrawVariable;
+                            checkedListBox.MeasureItem -= CheckedListBox_MeasureItem;
+                            checkedListBox.MeasureItem += CheckedListBox_MeasureItem;
+                            checkedListBox.DrawItem -= CheckedListBox_DrawItem;
+                            checkedListBox.DrawItem += CheckedListBox_DrawItem;
+                            break;
+
+                        case RichTextBox richTextBox:
+                            ResizeRichTextBox(richTextBox, yRatio);
+                            break;
+
+                        default:
+                            // Recursive call for child controls
+                            ResizeControls(ctrl);
+                            break;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Event handler for measuring items in the CheckedListBox to adjust their height.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event arguments.</param>
+        private void CheckedListBox_MeasureItem(object sender, MeasureItemEventArgs e)
+        {
+            if (sender is CheckedListBox checkedListBox)
+            {
+                float newItemHeight = checkedListBox.Font.Size * yRatio * 1.5f;
+                e.ItemHeight = (int)newItemHeight; // Adjust item height as needed
+            }
+        }
+
+        /// <summary>
+        /// Event handler for drawing items in the CheckedListBox to adjust their font size.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event arguments.</param>
+        private void CheckedListBox_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (sender is CheckedListBox checkedListBox)
+            {
+                if (e.Index >= 0)
+                {
+                    // Get the item text
+                    string text = checkedListBox.Items[e.Index].ToString();
+
+                    // Adjust font size using yRatio
+                    float fontSize = originalControlBounds.Find(cb => cb.Control == checkedListBox).OriginalFontSize * yRatio;
+
+                    // Create a new font with the adjusted font size
+                    Font itemFont = new Font(checkedListBox.Font.FontFamily, fontSize, checkedListBox.Font.Style);
+
+                    // Draw the background
+                    e.DrawBackground();
+
+                    // Draw the item text
+                    e.Graphics.DrawString(text, itemFont, Brushes.Black, e.Bounds);
+
+                    // Draw the focus rectangle if the mouse hovers over an item
+                    e.DrawFocusRectangle();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Resizes the text in a RichTextBox based on the given ratio.
+        /// </summary>
+        /// <param name="richTextBox">The RichTextBox control to resize text for.</param>
+        /// <param name="yRatio">The ratio to apply for resizing the text.</param>
+        private void ResizeRichTextBox(RichTextBox richTextBox, float yRatio)
+        {
+            richTextBox.SuspendLayout();
+            int start = richTextBox.SelectionStart;
+            int length = richTextBox.SelectionLength;
+            richTextBox.SelectAll();
+            richTextBox.SelectionFont = new Font(richTextBox.Font.FontFamily, richTextBox.Font.Size * yRatio, richTextBox.Font.Style);
+            richTextBox.Select(start, length);
+            richTextBox.ResumeLayout();
+        }
+
+        /// <summary>
+        /// Event handler for drawing items in the ComboBox to adjust their font size.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event arguments.</param>
+        private void ComboBox_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (sender is ComboBox comboBox)
+            {
+                if (e.Index >= 0)
+                {
+                    // Get the item text
+                    string text = comboBox.Items[e.Index].ToString();
+
+                    // Adjust font size using yRatio
+                    float fontSize = originalControlBounds.Find(cb => cb.Control == comboBox).OriginalFontSize * yRatio;
+
+                    // Create a new font with the adjusted font size
+                    Font itemFont = new Font(comboBox.Font.FontFamily, fontSize, comboBox.Font.Style);
+
+                    // Draw the background
+                    e.DrawBackground();
+
+                    // Draw the item text
+                    e.Graphics.DrawString(text, itemFont, Brushes.Black, e.Bounds);
+
+                    // Draw the focus rectangle if the mouse hovers over an item
+                    e.DrawFocusRectangle();
                 }
             }
         }

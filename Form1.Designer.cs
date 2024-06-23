@@ -46,6 +46,7 @@
             label1 = new Label();
             comboBox_db_shopping_lists = new ComboBox();
             groupBox_select_shop = new GroupBox();
+            tableLayoutPanel2 = new TableLayoutPanel();
             checkedListBox_select_shop = new CheckedListBox();
             groupBox_create_list = new GroupBox();
             listBox_products = new ListBox();
@@ -67,6 +68,7 @@
             groupBox_modus_manual.SuspendLayout();
             groupBox_modus_automatic.SuspendLayout();
             groupBox_select_shop.SuspendLayout();
+            tableLayoutPanel2.SuspendLayout();
             groupBox_create_list.SuspendLayout();
             groupBox1.SuspendLayout();
             groupBox_bill.SuspendLayout();
@@ -257,7 +259,7 @@
             // 
             // groupBox_select_shop
             // 
-            groupBox_select_shop.Controls.Add(checkedListBox_select_shop);
+            groupBox_select_shop.Controls.Add(tableLayoutPanel2);
             groupBox_select_shop.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             groupBox_select_shop.Location = new Point(618, 12);
             groupBox_select_shop.Name = "groupBox_select_shop";
@@ -266,15 +268,29 @@
             groupBox_select_shop.TabStop = false;
             groupBox_select_shop.Text = "Einkaufsladen auswaehlen";
             // 
+            // tableLayoutPanel2
+            // 
+            tableLayoutPanel2.ColumnCount = 1;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel2.Controls.Add(checkedListBox_select_shop, 0, 0);
+            tableLayoutPanel2.Dock = DockStyle.Fill;
+            tableLayoutPanel2.Location = new Point(3, 29);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 1;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel2.Size = new Size(298, 189);
+            tableLayoutPanel2.TabIndex = 1;
+            // 
             // checkedListBox_select_shop
             // 
             checkedListBox_select_shop.BorderStyle = BorderStyle.FixedSingle;
             checkedListBox_select_shop.CheckOnClick = true;
+            checkedListBox_select_shop.Dock = DockStyle.Fill;
             checkedListBox_select_shop.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             checkedListBox_select_shop.FormattingEnabled = true;
-            checkedListBox_select_shop.Location = new Point(11, 37);
+            checkedListBox_select_shop.Location = new Point(3, 3);
             checkedListBox_select_shop.Name = "checkedListBox_select_shop";
-            checkedListBox_select_shop.Size = new Size(287, 146);
+            checkedListBox_select_shop.Size = new Size(292, 183);
             checkedListBox_select_shop.TabIndex = 0;
             // 
             // groupBox_create_list
@@ -430,13 +446,13 @@
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.ColumnCount = 1;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.Controls.Add(richTextBox_bill, 0, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(3, 29);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle());
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.Size = new Size(398, 278);
             tableLayoutPanel1.TabIndex = 1;
             // 
@@ -444,7 +460,7 @@
             // 
             richTextBox_bill.BorderStyle = BorderStyle.FixedSingle;
             richTextBox_bill.Dock = DockStyle.Fill;
-            richTextBox_bill.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            richTextBox_bill.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             richTextBox_bill.Location = new Point(3, 3);
             richTextBox_bill.Name = "richTextBox_bill";
             richTextBox_bill.ReadOnly = true;
@@ -455,9 +471,7 @@
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            AutoScaleMode = AutoScaleMode.None;
             ClientSize = new Size(934, 561);
             Controls.Add(groupBox_bill);
             Controls.Add(groupBox1);
@@ -467,7 +481,6 @@
             Controls.Add(groupBox_modus_manual);
             Controls.Add(groupBox_modus);
             Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Form1";
             Text = "SchnaeppchenJaeger ©Nathan Otterbach, GSCR";
             groupBox_modus.ResumeLayout(false);
@@ -477,6 +490,7 @@
             groupBox_modus_automatic.ResumeLayout(false);
             groupBox_modus_automatic.PerformLayout();
             groupBox_select_shop.ResumeLayout(false);
+            tableLayoutPanel2.ResumeLayout(false);
             groupBox_create_list.ResumeLayout(false);
             groupBox_create_list.PerformLayout();
             groupBox1.ResumeLayout(false);
@@ -523,5 +537,6 @@
         private TextBox textBox_zipCode_automatic;
         private Label label2;
         private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel tableLayoutPanel2;
     }
 }
