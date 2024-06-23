@@ -12,6 +12,7 @@ namespace SchnaeppchenJaeger
         private CancellationTokenSource _cancellationTokenSource;
         private Mode _currentMode = Mode.Manual;
         private Status_DB _statusDB = Status_DB.Disconnected;
+        private Resizer _resizer;
 
         private enum Mode
         {
@@ -27,12 +28,9 @@ namespace SchnaeppchenJaeger
 
         public Form1()
         {
-            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
-            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
-            Resize objFormResizer = new Resize();
-            objFormResizer.ResizeForm(this, screenHeight, screenWidth);
-
             InitializeComponent();
+
+            _resizer = new Resizer(this);
 
             _dbHelper = DatabaseHelper.Instance;
             UpdateDatabaseConnectionStatus();
