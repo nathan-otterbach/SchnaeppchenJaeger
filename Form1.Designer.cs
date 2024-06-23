@@ -61,6 +61,7 @@
             groupBox1 = new GroupBox();
             label_db_status = new Label();
             groupBox_bill = new GroupBox();
+            tableLayoutPanel1 = new TableLayoutPanel();
             richTextBox_bill = new RichTextBox();
             groupBox_modus.SuspendLayout();
             groupBox_modus_manual.SuspendLayout();
@@ -69,6 +70,7 @@
             groupBox_create_list.SuspendLayout();
             groupBox1.SuspendLayout();
             groupBox_bill.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // button_search_manual
@@ -123,7 +125,7 @@
             checkBox_modus.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             checkBox_modus.Location = new Point(12, 33);
             checkBox_modus.Name = "checkBox_modus";
-            checkBox_modus.Size = new Size(74, 15);
+            checkBox_modus.Size = new Size(116, 25);
             checkBox_modus.TabIndex = 5;
             checkBox_modus.Text = "Automatisch";
             checkBox_modus.UseVisualStyleBackColor = true;
@@ -416,7 +418,7 @@
             // 
             // groupBox_bill
             // 
-            groupBox_bill.Controls.Add(richTextBox_bill);
+            groupBox_bill.Controls.Add(tableLayoutPanel1);
             groupBox_bill.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             groupBox_bill.Location = new Point(518, 239);
             groupBox_bill.Name = "groupBox_bill";
@@ -425,15 +427,29 @@
             groupBox_bill.TabStop = false;
             groupBox_bill.Text = "Resultat";
             // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.ColumnCount = 1;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel1.Controls.Add(richTextBox_bill, 0, 0);
+            tableLayoutPanel1.Dock = DockStyle.Fill;
+            tableLayoutPanel1.Location = new Point(3, 29);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 1;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle());
+            tableLayoutPanel1.Size = new Size(398, 278);
+            tableLayoutPanel1.TabIndex = 1;
+            // 
             // richTextBox_bill
             // 
             richTextBox_bill.BorderStyle = BorderStyle.FixedSingle;
+            richTextBox_bill.Dock = DockStyle.Fill;
             richTextBox_bill.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            richTextBox_bill.Location = new Point(11, 32);
+            richTextBox_bill.Location = new Point(3, 3);
             richTextBox_bill.Name = "richTextBox_bill";
             richTextBox_bill.ReadOnly = true;
             richTextBox_bill.ScrollBars = RichTextBoxScrollBars.Vertical;
-            richTextBox_bill.Size = new Size(387, 272);
+            richTextBox_bill.Size = new Size(392, 272);
             richTextBox_bill.TabIndex = 0;
             richTextBox_bill.Text = "";
             // 
@@ -466,6 +482,7 @@
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox_bill.ResumeLayout(false);
+            tableLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -505,5 +522,6 @@
         private ListBox listBox_products;
         private TextBox textBox_zipCode_automatic;
         private Label label2;
+        private TableLayoutPanel tableLayoutPanel1;
     }
 }
