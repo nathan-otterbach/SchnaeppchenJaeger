@@ -30,12 +30,14 @@ namespace SchnaeppchenJaeger.Utility
         private float xRatio;
         private float yRatio;
 
+        public Resizer() { }
+
         /// <summary>
         /// Initializes a new instance of the Resizer class for a given Form.
         /// </summary>
         /// <param name="form">The Form to resize controls for.</param>
         /// <exception cref="ArgumentNullException">Thrown if form is null.</exception>
-        public Resizer(Form form)
+        public Resizer(Form form) : this()
         {
             if (form == null)
                 throw new ArgumentNullException(nameof(form));
@@ -199,12 +201,15 @@ namespace SchnaeppchenJaeger.Utility
             {
                 if (e.Index >= 0)
                 {
+                    StringFormat sf = new StringFormat();
+                    sf.LineAlignment = StringAlignment.Center;
+
                     string text = comboBox.Items[e.Index].ToString();
                     float fontSize = originalControlBounds.Find(cb => cb.Control == comboBox).OriginalFontSize * yRatio;
                     Font itemFont = new Font(comboBox.Font.FontFamily, fontSize, comboBox.Font.Style);
 
                     e.DrawBackground();
-                    e.Graphics.DrawString(text, itemFont, Brushes.Black, e.Bounds);
+                    e.Graphics.DrawString(text, itemFont, Brushes.Black, e.Bounds, sf);
                     e.DrawFocusRectangle();
                 }
             }

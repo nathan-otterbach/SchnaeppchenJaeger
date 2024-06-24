@@ -269,12 +269,13 @@
             // 
             // comboBox_db_shopping_lists
             // 
+            comboBox_db_shopping_lists.DrawMode = DrawMode.OwnerDrawFixed;
             comboBox_db_shopping_lists.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox_db_shopping_lists.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             comboBox_db_shopping_lists.FormattingEnabled = true;
             comboBox_db_shopping_lists.Location = new Point(122, 61);
             comboBox_db_shopping_lists.Name = "comboBox_db_shopping_lists";
-            comboBox_db_shopping_lists.Size = new Size(332, 29);
+            comboBox_db_shopping_lists.Size = new Size(332, 30);
             comboBox_db_shopping_lists.Sorted = true;
             comboBox_db_shopping_lists.TabIndex = 0;
             // 
@@ -337,6 +338,7 @@
             // 
             // listBox_products
             // 
+            listBox_products.DrawMode = DrawMode.OwnerDrawFixed;
             listBox_products.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             listBox_products.FormattingEnabled = true;
             listBox_products.ItemHeight = 21;
@@ -348,12 +350,13 @@
             // 
             // comboBox_lists
             // 
+            comboBox_lists.DrawMode = DrawMode.OwnerDrawFixed;
             comboBox_lists.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox_lists.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             comboBox_lists.FormattingEnabled = true;
             comboBox_lists.Location = new Point(15, 108);
             comboBox_lists.Name = "comboBox_lists";
-            comboBox_lists.Size = new Size(232, 29);
+            comboBox_lists.Size = new Size(232, 30);
             comboBox_lists.Sorted = true;
             comboBox_lists.TabIndex = 13;
             comboBox_lists.SelectedIndexChanged += comboBox_lists_SelectedIndexChanged;
