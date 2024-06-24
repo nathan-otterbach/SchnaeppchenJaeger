@@ -106,14 +106,14 @@ namespace SchnaeppchenJaeger.Utility
                     ctrl.Bounds = new Rectangle(newX, newY, newWidth, newHeight);
                     ctrl.Font = new Font(ctrl.Font.FontFamily, original.OriginalFontSize * yRatio, ctrl.Font.Style);
 
-                    // Special handling for certain control types using a switch statement
+                    // Special handling for certain control types
                     switch (ctrl)
                     {
                         case ComboBox comboBox:
                             comboBox.DrawMode = DrawMode.OwnerDrawFixed;
-                            comboBox.DrawItem -= ComboBox_DrawItem; // Unsubscribe to avoid multiple subscriptions
+                            comboBox.DrawItem -= ComboBox_DrawItem;
                             comboBox.DrawItem += ComboBox_DrawItem;
-                            comboBox.ItemHeight = (int)(original.OriginalFontSize * yRatio * 1.5); // Adjust item height as needed
+                            comboBox.ItemHeight = (int)(original.OriginalFontSize * yRatio * 1.5);
                             break;
 
                         case CheckedListBox checkedListBox:
@@ -129,7 +129,6 @@ namespace SchnaeppchenJaeger.Utility
                             break;
 
                         default:
-                            // Recursive call for child controls
                             ResizeControls(ctrl);
                             break;
                     }
@@ -162,22 +161,12 @@ namespace SchnaeppchenJaeger.Utility
             {
                 if (e.Index >= 0)
                 {
-                    // Get the item text
                     string text = checkedListBox.Items[e.Index].ToString();
-
-                    // Adjust font size using yRatio
                     float fontSize = originalControlBounds.Find(cb => cb.Control == checkedListBox).OriginalFontSize * yRatio;
-
-                    // Create a new font with the adjusted font size
                     Font itemFont = new Font(checkedListBox.Font.FontFamily, fontSize, checkedListBox.Font.Style);
 
-                    // Draw the background
                     e.DrawBackground();
-
-                    // Draw the item text
                     e.Graphics.DrawString(text, itemFont, Brushes.Black, e.Bounds);
-
-                    // Draw the focus rectangle if the mouse hovers over an item
                     e.DrawFocusRectangle();
                 }
             }
@@ -210,22 +199,12 @@ namespace SchnaeppchenJaeger.Utility
             {
                 if (e.Index >= 0)
                 {
-                    // Get the item text
                     string text = comboBox.Items[e.Index].ToString();
-
-                    // Adjust font size using yRatio
                     float fontSize = originalControlBounds.Find(cb => cb.Control == comboBox).OriginalFontSize * yRatio;
-
-                    // Create a new font with the adjusted font size
                     Font itemFont = new Font(comboBox.Font.FontFamily, fontSize, comboBox.Font.Style);
 
-                    // Draw the background
                     e.DrawBackground();
-
-                    // Draw the item text
                     e.Graphics.DrawString(text, itemFont, Brushes.Black, e.Bounds);
-
-                    // Draw the focus rectangle if the mouse hovers over an item
                     e.DrawFocusRectangle();
                 }
             }

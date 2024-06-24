@@ -35,6 +35,7 @@
             label_product = new Label();
             checkBox_modus = new CheckBox();
             groupBox_modus = new GroupBox();
+            tableLayoutPanel3 = new TableLayoutPanel();
             label_modus_indicator = new Label();
             groupBox_modus_manual = new GroupBox();
             button_cancel_manual = new Button();
@@ -60,17 +61,20 @@
             button_create_list = new Button();
             label_list_name = new Label();
             groupBox1 = new GroupBox();
+            tableLayoutPanel4 = new TableLayoutPanel();
             label_db_status = new Label();
             groupBox_bill = new GroupBox();
             tableLayoutPanel1 = new TableLayoutPanel();
             richTextBox_bill = new RichTextBox();
             groupBox_modus.SuspendLayout();
+            tableLayoutPanel3.SuspendLayout();
             groupBox_modus_manual.SuspendLayout();
             groupBox_modus_automatic.SuspendLayout();
             groupBox_select_shop.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             groupBox_create_list.SuspendLayout();
             groupBox1.SuspendLayout();
+            tableLayoutPanel4.SuspendLayout();
             groupBox_bill.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
@@ -124,10 +128,11 @@
             // checkBox_modus
             // 
             checkBox_modus.AutoSize = true;
+            checkBox_modus.Dock = DockStyle.Fill;
             checkBox_modus.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            checkBox_modus.Location = new Point(12, 33);
+            checkBox_modus.Location = new Point(3, 3);
             checkBox_modus.Name = "checkBox_modus";
-            checkBox_modus.Size = new Size(116, 25);
+            checkBox_modus.Size = new Size(122, 25);
             checkBox_modus.TabIndex = 5;
             checkBox_modus.Text = "Automatisch";
             checkBox_modus.UseVisualStyleBackColor = true;
@@ -135,8 +140,7 @@
             // 
             // groupBox_modus
             // 
-            groupBox_modus.Controls.Add(label_modus_indicator);
-            groupBox_modus.Controls.Add(checkBox_modus);
+            groupBox_modus.Controls.Add(tableLayoutPanel3);
             groupBox_modus.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             groupBox_modus.Location = new Point(478, 12);
             groupBox_modus.Name = "groupBox_modus";
@@ -145,14 +149,30 @@
             groupBox_modus.TabStop = false;
             groupBox_modus.Text = "Modus";
             // 
+            // tableLayoutPanel3
+            // 
+            tableLayoutPanel3.ColumnCount = 1;
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel3.Controls.Add(checkBox_modus, 0, 0);
+            tableLayoutPanel3.Controls.Add(label_modus_indicator, 0, 1);
+            tableLayoutPanel3.Dock = DockStyle.Fill;
+            tableLayoutPanel3.Location = new Point(3, 29);
+            tableLayoutPanel3.Name = "tableLayoutPanel3";
+            tableLayoutPanel3.RowCount = 2;
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel3.Size = new Size(128, 62);
+            tableLayoutPanel3.TabIndex = 10;
+            // 
             // label_modus_indicator
             // 
             label_modus_indicator.AutoSize = true;
+            label_modus_indicator.Dock = DockStyle.Fill;
             label_modus_indicator.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label_modus_indicator.ForeColor = Color.Red;
-            label_modus_indicator.Location = new Point(12, 61);
+            label_modus_indicator.Location = new Point(3, 31);
             label_modus_indicator.Name = "label_modus_indicator";
-            label_modus_indicator.Size = new Size(66, 21);
+            label_modus_indicator.Size = new Size(122, 31);
             label_modus_indicator.TabIndex = 9;
             label_modus_indicator.Text = "Manuell";
             // 
@@ -255,6 +275,7 @@
             comboBox_db_shopping_lists.Location = new Point(122, 61);
             comboBox_db_shopping_lists.Name = "comboBox_db_shopping_lists";
             comboBox_db_shopping_lists.Size = new Size(332, 29);
+            comboBox_db_shopping_lists.Sorted = true;
             comboBox_db_shopping_lists.TabIndex = 0;
             // 
             // groupBox_select_shop
@@ -291,6 +312,7 @@
             checkedListBox_select_shop.Location = new Point(3, 3);
             checkedListBox_select_shop.Name = "checkedListBox_select_shop";
             checkedListBox_select_shop.Size = new Size(292, 183);
+            checkedListBox_select_shop.Sorted = true;
             checkedListBox_select_shop.TabIndex = 0;
             // 
             // groupBox_create_list
@@ -321,6 +343,7 @@
             listBox_products.Location = new Point(262, 108);
             listBox_products.Name = "listBox_products";
             listBox_products.Size = new Size(232, 130);
+            listBox_products.Sorted = true;
             listBox_products.TabIndex = 14;
             // 
             // comboBox_lists
@@ -331,6 +354,7 @@
             comboBox_lists.Location = new Point(15, 108);
             comboBox_lists.Name = "comboBox_lists";
             comboBox_lists.Size = new Size(232, 29);
+            comboBox_lists.Sorted = true;
             comboBox_lists.TabIndex = 13;
             comboBox_lists.SelectedIndexChanged += comboBox_lists_SelectedIndexChanged;
             // 
@@ -412,7 +436,7 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(label_db_status);
+            groupBox1.Controls.Add(tableLayoutPanel4);
             groupBox1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             groupBox1.Location = new Point(478, 112);
             groupBox1.Name = "groupBox1";
@@ -421,14 +445,28 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Status";
             // 
+            // tableLayoutPanel4
+            // 
+            tableLayoutPanel4.ColumnCount = 1;
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel4.Controls.Add(label_db_status, 0, 0);
+            tableLayoutPanel4.Dock = DockStyle.Fill;
+            tableLayoutPanel4.Location = new Point(3, 29);
+            tableLayoutPanel4.Name = "tableLayoutPanel4";
+            tableLayoutPanel4.RowCount = 1;
+            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel4.Size = new Size(128, 39);
+            tableLayoutPanel4.TabIndex = 10;
+            // 
             // label_db_status
             // 
             label_db_status.AutoSize = true;
+            label_db_status.Dock = DockStyle.Fill;
             label_db_status.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label_db_status.ForeColor = Color.Red;
-            label_db_status.Location = new Point(12, 35);
+            label_db_status.Location = new Point(3, 0);
             label_db_status.Name = "label_db_status";
-            label_db_status.Size = new Size(103, 21);
+            label_db_status.Size = new Size(122, 39);
             label_db_status.TabIndex = 9;
             label_db_status.Text = "Disconnected";
             // 
@@ -484,7 +522,8 @@
             Name = "Form1";
             Text = "SchnaeppchenJaeger ©Nathan Otterbach, GSCR";
             groupBox_modus.ResumeLayout(false);
-            groupBox_modus.PerformLayout();
+            tableLayoutPanel3.ResumeLayout(false);
+            tableLayoutPanel3.PerformLayout();
             groupBox_modus_manual.ResumeLayout(false);
             groupBox_modus_manual.PerformLayout();
             groupBox_modus_automatic.ResumeLayout(false);
@@ -494,7 +533,8 @@
             groupBox_create_list.ResumeLayout(false);
             groupBox_create_list.PerformLayout();
             groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
+            tableLayoutPanel4.ResumeLayout(false);
+            tableLayoutPanel4.PerformLayout();
             groupBox_bill.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
@@ -538,5 +578,7 @@
         private Label label2;
         private TableLayoutPanel tableLayoutPanel1;
         private TableLayoutPanel tableLayoutPanel2;
+        private TableLayoutPanel tableLayoutPanel3;
+        private TableLayoutPanel tableLayoutPanel4;
     }
 }
