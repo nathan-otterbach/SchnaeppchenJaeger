@@ -21,6 +21,7 @@ namespace SchnaeppchenJaeger.Utility
     /// Credits to Stack Overflow users for original concepts:
     /// - https://stackoverflow.com/questions/50167571/make-forms-fit-to-every-size-of-screen
     /// - https://stackoverflow.com/questions/46316025/how-to-resize-controls-inside-groupbox-without-overlapping
+    /// - https://stackoverflow.com/questions/11817062/align-text-in-combobox
     /// - Thanks to @Maximilian Hankele for contributions.
     /// </remarks>
     public class Resizer
@@ -57,6 +58,8 @@ namespace SchnaeppchenJaeger.Utility
         private void Form_Load(object sender, EventArgs e)
         {
             // No action needed here since initialization is handled in the constructor.
+
+            // load combobx items
         }
 
         /// <summary>

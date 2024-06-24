@@ -31,15 +31,11 @@ namespace SchnaeppchenJaeger
             InitializeComponent();
 
             _resizer = new Resizer(this);
-
             _dbHelper = DatabaseHelper.Instance;
+
             UpdateDatabaseConnectionStatus();
-
             UpdateUIForMode();
-
             PopulateShoppingListComboBox();
-            comboBox_lists.SelectedIndexChanged += comboBox_lists_SelectedIndexChanged;
-
             checkedListBox_select_shop.Items.AddRange(new string[]
             {
                 "Aldi",
@@ -52,6 +48,7 @@ namespace SchnaeppchenJaeger
             });
             Load();
 
+            comboBox_lists.SelectedIndexChanged += comboBox_lists_SelectedIndexChanged;
             FormClosing += Form1_FormClosing;
         }
 
