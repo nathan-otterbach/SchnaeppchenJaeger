@@ -73,6 +73,12 @@ namespace SchnaeppchenJaeger
             Program._utils.populatedData.Clear();
             _cancellationTokenSource = new CancellationTokenSource();
 
+            if (string.IsNullOrWhiteSpace(textBox_zipCode.Text.Trim()) || string.IsNullOrWhiteSpace(textBox_product.Text.Trim()))
+            {
+                MessageBox.Show("Please enter a zip code and product");
+                return;
+            }
+
             using (var client = new ApiClient(Convert.ToUInt32(textBox_zipCode.Text.Trim()), textBox_product.Text.Trim()))
             {
                 await client.GetOffersAsync(_cancellationTokenSource.Token);
@@ -273,6 +279,12 @@ namespace SchnaeppchenJaeger
             richTextBox_bill.Clear();
             Program._utils.populatedData.Clear();
             _cancellationTokenSource = new CancellationTokenSource();
+
+            if (string.IsNullOrWhiteSpace(textBox_zipCode.Text.Trim()) || comboBox_db_shopping_lists.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please enter a zip code and product");
+                return;
+            }
 
             _dbHelper.GetAllProductsFromShoppingList(comboBox_db_shopping_lists.SelectedItem.ToString());
             for (int i = 0; i < Program._utils.products.Count; i++)
