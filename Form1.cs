@@ -84,19 +84,19 @@ namespace SchnaeppchenJaeger
                 if (Program._utils.populatedData.ElementAt(i).Key.Contains("Price_")
                     && !Program._utils.populatedData.ElementAt(i).Key.Contains("ReferencePrice_"))
                 {
-                    string priceText = $"{Program._utils.populatedData.ElementAt(i).Value} �\n";
+                    string priceText = $"{Program._utils.populatedData.ElementAt(i).Value} €\n";
                     richTextBox_bill.AppendText(priceText);
                 }
 
                 else if (Program._utils.populatedData.ElementAt(i).Key.Contains("ReferencePrice_"))
                 {
-                    string refrerencePriceText = $"{Program._utils.populatedData.ElementAt(i).Value} � pro ";
+                    string refrerencePriceText = $"{Program._utils.populatedData.ElementAt(i).Value} € pro ";
                     richTextBox_bill.AppendText(refrerencePriceText);
                 }
 
                 else if (Program._utils.populatedData.ElementAt(i).Key.Contains("FromDate_"))
                 {
-                    string fromDateText = $"G�tltig von: {Program._utils.populatedData.ElementAt(i).Value} bis ";
+                    string fromDateText = $"Gütltig von: {Program._utils.populatedData.ElementAt(i).Value} bis ";
                     richTextBox_bill.AppendText(fromDateText);
                 }
 
@@ -104,12 +104,12 @@ namespace SchnaeppchenJaeger
                 {
                     if (Program._utils.populatedData.ElementAt(i).Value.Equals("True", StringComparison.OrdinalIgnoreCase))
                     {
-                        string requiresLoyaltyMembershipText = $"Kudenkarte ben�tigt\n\n";
+                        string requiresLoyaltyMembershipText = $"Kudenkarte benötigt\n\n";
                         richTextBox_bill.AppendText(requiresLoyaltyMembershipText);
                     }
                     else
                     {
-                        string requiresLoyaltyMembershipText = $"Kudenkarte nicht ben�tigt\n\n";
+                        string requiresLoyaltyMembershipText = $"Kudenkarte nicht benötigt\n\n";
                         richTextBox_bill.AppendText(requiresLoyaltyMembershipText);
                     }
                 }
@@ -289,19 +289,19 @@ namespace SchnaeppchenJaeger
                     if (Program._utils.populatedData.ElementAt(j).Key.Contains("Price_")
                         && !Program._utils.populatedData.ElementAt(j).Key.Contains("ReferencePrice_"))
                     {
-                        string priceText = $"{Program._utils.populatedData.ElementAt(j).Value} �\n";
+                        string priceText = $"{Program._utils.populatedData.ElementAt(j).Value} €\n";
                         richTextBox_bill.AppendText(priceText);
                     }
 
                     else if (Program._utils.populatedData.ElementAt(j).Key.Contains("ReferencePrice_"))
                     {
-                        string refrerencePriceText = $"{Program._utils.populatedData.ElementAt(j).Value} � pro ";
+                        string refrerencePriceText = $"{Program._utils.populatedData.ElementAt(j).Value} € pro ";
                         richTextBox_bill.AppendText(refrerencePriceText);
                     }
 
                     else if (Program._utils.populatedData.ElementAt(j).Key.Contains("FromDate_"))
                     {
-                        string fromDateText = $"G�tltig von: {Program._utils.populatedData.ElementAt(j).Value} bis ";
+                        string fromDateText = $"Gütltig von: {Program._utils.populatedData.ElementAt(j).Value} bis ";
                         richTextBox_bill.AppendText(fromDateText);
                     }
 
@@ -309,12 +309,12 @@ namespace SchnaeppchenJaeger
                     {
                         if (Program._utils.populatedData.ElementAt(j).Value.Equals("True", StringComparison.OrdinalIgnoreCase))
                         {
-                            string requiresLoyaltyMembershipText = $"Kudenkarte ben�tigt\n\n";
+                            string requiresLoyaltyMembershipText = $"Kudenkarte benötigt\n\n";
                             richTextBox_bill.AppendText(requiresLoyaltyMembershipText);
                         }
                         else
                         {
-                            string requiresLoyaltyMembershipText = $"Kudenkarte nicht ben�tigt\n\n";
+                            string requiresLoyaltyMembershipText = $"Kudenkarte nicht benötigt\n\n";
                             richTextBox_bill.AppendText(requiresLoyaltyMembershipText);
                         }
                     }
