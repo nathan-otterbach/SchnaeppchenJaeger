@@ -338,9 +338,7 @@
             // 
             // listBox_products
             // 
-            listBox_products.DrawMode = DrawMode.OwnerDrawFixed;
             listBox_products.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            listBox_products.FormattingEnabled = true;
             listBox_products.ItemHeight = 21;
             listBox_products.Location = new Point(262, 108);
             listBox_products.Name = "listBox_products";
