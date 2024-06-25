@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="SchnaeppchenJaeger.Client.ApiClient">
-    <Position X="3.75" Y="0.5" Width="2.25" />
+    <Position X="3.25" Y="0.5" Width="2.25" />
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
@@ -19,7 +19,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SchnaeppchenJaeger.Data.DTO">
-    <Position X="12.75" Y="0.5" Width="2.5" />
+    <Position X="10.75" Y="0.5" Width="2.5" />
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
@@ -114,17 +114,34 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SchnaeppchenJaeger.Model.ShoppingList">
-    <Position X="6.75" Y="0.5" Width="2.25" />
+    <Position X="5.75" Y="0.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAgAAQAgAAAAIAAAAAAAAAAAAAgAAEAABAABAAA=</HashCode>
       <FileName>Model\ShoppingList.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SchnaeppchenJaeger.Utility.Utils">
-    <Position X="9.75" Y="0.5" Width="2.25" />
+    <Position X="8.25" Y="0.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAgAAAAAAAABAAAIAE=</HashCode>
       <FileName>Utility\Utils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SchnaeppchenJaeger.Utility.Resizer">
+    <Position X="13.5" Y="0.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Struct Name="SchnaeppchenJaeger.Utility.Resizer.ControlBounds">
+        <TypeIdentifier>
+          <NewMemberFileName>Utility\Resizer.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AgAACAAA0AAAAAAIAAAAAAAAAAABAAAAAAgBAAQAACA=</HashCode>
+      <FileName>Utility\Resizer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

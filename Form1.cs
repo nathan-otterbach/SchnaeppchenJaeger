@@ -2,7 +2,6 @@
 using SchnaeppchenJaeger.Database;
 using SchnaeppchenJaeger.Utility;
 using System.Configuration;
-using System.Windows.Forms;
 
 namespace SchnaeppchenJaeger
 {

@@ -4,7 +4,6 @@ using System.Configuration;
 using System.Net.Http.Headers;
 using Polly;
 using Polly.Retry;
-using SchnaeppchenJaeger.Utility;
 
 namespace SchnaeppchenJaeger.Client
 {
