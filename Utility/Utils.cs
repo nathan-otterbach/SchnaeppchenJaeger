@@ -3,7 +3,7 @@
 namespace SchnaeppchenJaeger.Utility
 {
     /// <summary>
-    /// Utility class for common operations.
+    /// Utility class for common operations related to handling HTTP responses and JSON data.
     /// </summary>
     public class Utils
     {
@@ -48,9 +48,12 @@ namespace SchnaeppchenJaeger.Utility
             return populatedData;
         }
 
+        /// <summary>
+        /// Filters and keeps only the entries with the two lowest reference prices in the populated data.
+        /// </summary>
+        /// <param name="populatedData">The dictionary containing populated data to filter.</param>
         public void KeepCheapestEntries(Dictionary<string, string> populatedData)
         {
-            // Create a list to store KeyValuePair of referencePrice and corresponding key
             var referencePrices = new List<KeyValuePair<decimal, int>>();
 
             // Iterate through populatedData to extract reference prices
@@ -58,20 +61,14 @@ namespace SchnaeppchenJaeger.Utility
             {
                 if (entry.Key.StartsWith("ReferencePrice_") && decimal.TryParse(entry.Value, out decimal price))
                 {
-                    // Extract the index from the key
                     int index = int.Parse(entry.Key.Substring("ReferencePrice_".Length));
-
                     referencePrices.Add(new KeyValuePair<decimal, int>(price, index));
                 }
             }
 
             // Sort referencePrices by price
             referencePrices.Sort((x, y) => x.Key.CompareTo(y.Key));
-
-            // Keep only the two cheapest entries
             var cheapestIndices = referencePrices.Take(2).Select(pair => pair.Value).ToList();
-
-            // Create a new dictionary to store the cheapest entries
             var cheapestEntries = new Dictionary<string, string>();
 
             // Copy all information for the cheapest entries to the new dictionary
@@ -79,7 +76,6 @@ namespace SchnaeppchenJaeger.Utility
             {
                 foreach (var entry in populatedData)
                 {
-                    // Check if the key contains the index
                     if (entry.Key.Contains($"_{index}"))
                     {
                         cheapestEntries[entry.Key] = entry.Value;
@@ -87,7 +83,6 @@ namespace SchnaeppchenJaeger.Utility
                 }
             }
 
-            // Clear the original populatedData
             populatedData.Clear();
 
             // Copy back the cheapest entries to the original populatedData

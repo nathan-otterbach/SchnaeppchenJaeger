@@ -7,11 +7,17 @@ namespace SchnaeppchenJaeger
 {
     public partial class Form1 : Form
     {
+        #region Fields
+
         private DatabaseHelper _dbHelper;
         private CancellationTokenSource _cancellationTokenSource;
         private Mode _currentMode = Mode.Manual;
         private Status_DB _statusDB = Status_DB.Disconnected;
         private Resizer _resizer;
+
+        #endregion
+
+        #region Enums
 
         private enum Mode
         {
@@ -25,6 +31,13 @@ namespace SchnaeppchenJaeger
             Disconnected
         }
 
+        #endregion
+
+        #region Constructor and Initialization
+
+        /// <summary>
+        /// Initializes the Form1 instance.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
@@ -47,6 +60,7 @@ namespace SchnaeppchenJaeger
                 "PENNY",
                 "REWE"
             });
+
             Load();
 
             _resizer = new Resizer(this);
@@ -54,18 +68,14 @@ namespace SchnaeppchenJaeger
             FormClosing += Form1_FormClosing;
         }
 
-        // use method before get property method, so we update the list of selected shops
-        private void GetSelectedShops()
-        {
-            for (int i = 0; i < checkedListBox_select_shop.Items.Count; i++)
-            {
-                if (checkedListBox_select_shop.GetItemChecked(i))
-                {
-                    Program._utils.selectedShops.Add(checkedListBox_select_shop.Items[i].ToString());
-                }
-            }
-        }
+        #endregion
 
+        #region Event Handlers
+
+        /// <summary>
+        /// Event handler for the "Search Manual" button click.
+        /// Initiates a manual search based on user input.
+        /// </summary>
         private async void button_search_manual_Click(object sender, EventArgs e)
         {
             GetSelectedShops();
@@ -90,14 +100,50 @@ namespace SchnaeppchenJaeger
             await GetAndDisplayOffersAsync(product);
         }
 
+        /// <summary>
+        /// Event handler for the "Search Automatic" button click.
+        /// Initiates an automatic search based on selected shopping list and zip code.
+        /// </summary>
+        private async void button_search_automatic_Click(object sender, EventArgs e)
+        {
+            GetSelectedShops();
+            richTextBox_bill.Clear();
+            _cancellationTokenSource = new CancellationTokenSource();
+
+            if (string.IsNullOrWhiteSpace(textBox_zipCode.Text.Trim()) || comboBox_db_shopping_lists.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please enter a zip code and select a shopping list");
+                return;
+            }
+
+            string selectedShoppingList = comboBox_db_shopping_lists.SelectedItem.ToString();
+            Program._utils.products = _dbHelper.GetAllProductsFromShoppingList(selectedShoppingList);
+
+            foreach (var product in Program._utils.products)
+            {
+                Program._utils.populatedData.Clear(); // Clear data for each product
+
+                await GetAndDisplayOffersAsync(product);
+            }
+        }
+
+        /// <summary>
+        /// Event handler for the "Modus" checkbox checked changed event.
+        /// Toggles between manual and automatic modes.
+        /// </summary>
         private void checkBox_modus_CheckedChanged(object sender, EventArgs e)
         {
             ToggleMode();
             UpdateUIForMode();
         }
 
+        #endregion
+
         #region Helper Methods
 
+        /// <summary>
+        /// Updates the database connection status label based on the current connection state.
+        /// </summary>
         private void UpdateDatabaseConnectionStatus()
         {
             if (_dbHelper.IsDatabaseConnected())
@@ -114,7 +160,9 @@ namespace SchnaeppchenJaeger
             }
         }
 
-
+        /// <summary>
+        /// Toggles the current mode between manual and automatic.
+        /// </summary>
         private void ToggleMode()
         {
             switch (_currentMode)
@@ -128,6 +176,9 @@ namespace SchnaeppchenJaeger
             }
         }
 
+        /// <summary>
+        /// Updates the UI elements based on the current mode.
+        /// </summary>
         private void UpdateUIForMode()
         {
             switch (_currentMode)
@@ -154,6 +205,11 @@ namespace SchnaeppchenJaeger
             }
         }
 
+        /// <summary>
+        /// Replaces special characters in a table name with underscores.
+        /// </summary>
+        /// <param name="tableName">The original table name.</param>
+        /// <returns>The table name with special characters replaced.</returns>
         private string ReplaceSpecialCharacters(string tableName)
         {
             char[] specialCharacters = new char[] { ' ', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '+', '=', '{', '}', '[', ']', ';', ':', '\'', '"', ',', '.', '/', '\\', '<', '>', '?' };
@@ -165,6 +221,9 @@ namespace SchnaeppchenJaeger
             return tableName;
         }
 
+        /// <summary>
+        /// Populates the shopping list ComboBox with available shopping lists from the database.
+        /// </summary>
         private void PopulateShoppingListComboBox()
         {
             comboBox_lists.Items.Clear();
@@ -182,6 +241,9 @@ namespace SchnaeppchenJaeger
             }
         }
 
+        /// <summary>
+        /// Populates the product ListBox based on the selected shopping list.
+        /// </summary>
         private void PopulateProductListbox()
         {
             listBox_products.Items.Clear();
@@ -193,6 +255,9 @@ namespace SchnaeppchenJaeger
             }
         }
 
+        /// <summary>
+        /// Loads initial settings from configuration and populates UI elements.
+        /// </summary>
         private void Load()
         {
             string selectedShops = ConfigurationManager.AppSettings["SelectedShops"];
@@ -216,6 +281,9 @@ namespace SchnaeppchenJaeger
             textBox_zipCode_automatic.Text = zipCode;
         }
 
+        /// <summary>
+        /// Saves current settings to configuration.
+        /// </summary>
         private void Save()
         {
             List<string> selectedShops = new List<string>();
@@ -232,32 +300,15 @@ namespace SchnaeppchenJaeger
             ConfigurationManager.RefreshSection("appSettings");
         }
 
-
         #endregion
 
-        private async void button_search_automatic_Click(object sender, EventArgs e)
-        {
-            GetSelectedShops();
-            richTextBox_bill.Clear();
-            _cancellationTokenSource = new CancellationTokenSource();
+        #region API Interaction Methods
 
-            if (string.IsNullOrWhiteSpace(textBox_zipCode.Text.Trim()) || comboBox_db_shopping_lists.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please enter a zip code and select a shopping list");
-                return;
-            }
-
-            string selectedShoppingList = comboBox_db_shopping_lists.SelectedItem.ToString();
-            Program._utils.products = _dbHelper.GetAllProductsFromShoppingList(selectedShoppingList);
-
-            foreach (var product in Program._utils.products)
-            {
-                Program._utils.populatedData.Clear(); // Clear data for each product
-
-                await GetAndDisplayOffersAsync(product);
-            }
-        }
-
+        /// <summary>
+        /// Retrieves and displays offers asynchronously for the specified product.
+        /// </summary>
+        /// <param name="product">The product to search offers for.</param>
+        /// <returns>Task representing the asynchronous operation.</returns>
         private async Task GetAndDisplayOffersAsync(string product)
         {
             using (var client = new ApiClient(Convert.ToUInt32(textBox_zipCode.Text.Trim()), product))
@@ -303,8 +354,13 @@ namespace SchnaeppchenJaeger
             }
         }
 
+        #endregion
 
+        #region Database Management Methods
 
+        /// <summary>
+        /// Creates a new shopping list table in the database.
+        /// </summary>
         private void button_create_list_Click(object sender, EventArgs e)
         {
             string tableName = ReplaceSpecialCharacters(textBox_list_name.Text.Trim());
@@ -314,6 +370,9 @@ namespace SchnaeppchenJaeger
             textBox_list_name.Clear();
         }
 
+        /// <summary>
+        /// Deletes the selected shopping list from the database.
+        /// </summary>
         private void button_delete_list_Click(object sender, EventArgs e)
         {
             if (comboBox_lists.SelectedIndex != -1)
@@ -327,6 +386,9 @@ namespace SchnaeppchenJaeger
             textBox_list_name.Clear();
         }
 
+        /// <summary>
+        /// Adds a product to the selected shopping list in the database.
+        /// </summary>
         private void button_add_product_to_list_Click(object sender, EventArgs e)
         {
             if (comboBox_lists.SelectedIndex != -1)
@@ -353,6 +415,9 @@ namespace SchnaeppchenJaeger
             }
         }
 
+        /// <summary>
+        /// Removes a product from the selected shopping list in the database.
+        /// </summary>
         private void button_remove_product_from_list_Click(object sender, EventArgs e)
         {
             if (comboBox_lists.SelectedIndex != -1 &&
@@ -380,16 +445,29 @@ namespace SchnaeppchenJaeger
             }
         }
 
+        #endregion
+
+        #region UI Event Handlers
+
+        /// <summary>
+        /// Updates the product list box when a different shopping list is selected.
+        /// </summary>
         private void comboBox_lists_SelectedIndexChanged(object sender, EventArgs e)
         {
             PopulateProductListbox();
         }
 
+        /// <summary>
+        /// Handles the form closing event to save application settings.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Save();
         }
 
+        /// <summary>
+        /// Cancels the ongoing manual search operation.
+        /// </summary>
         private void button_cancel_manual_Click(object sender, EventArgs e)
         {
             if (_cancellationTokenSource.Token.CanBeCanceled)
@@ -398,6 +476,9 @@ namespace SchnaeppchenJaeger
             }
         }
 
+        /// <summary>
+        /// Cancels the ongoing automatic search operation.
+        /// </summary>
         private void button_cancel_automatic_Click(object sender, EventArgs e)
         {
             if (_cancellationTokenSource.Token.CanBeCanceled)
@@ -405,5 +486,25 @@ namespace SchnaeppchenJaeger
                 _cancellationTokenSource.Cancel();
             }
         }
+
+        #endregion
+
+        #region Utility Methods
+
+        /// <summary>
+        /// Retrieves the selected shops from the UI and updates the selected shops list in the utility class.
+        /// </summary>
+        private void GetSelectedShops()
+        {
+            for (int i = 0; i < checkedListBox_select_shop.Items.Count; i++)
+            {
+                if (checkedListBox_select_shop.GetItemChecked(i))
+                {
+                    Program._utils.selectedShops.Add(checkedListBox_select_shop.Items[i].ToString());
+                }
+            }
+        }
+
+        #endregion
     }
 }
