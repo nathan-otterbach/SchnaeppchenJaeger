@@ -109,7 +109,9 @@ namespace SchnaeppchenJaeger.Utility
                     int newHeight = (int)(original.OriginalBounds.Height * yRatio);
 
                     ctrl.Bounds = new Rectangle(newX, newY, newWidth, newHeight);
-                    ctrl.Font = new Font(ctrl.Font.FontFamily, original.OriginalFontSize * yRatio, ctrl.Font.Style);
+                    float newFontSize = original.OriginalFontSize * yRatio;
+                    newFontSize = newFontSize <= 0 ? original.OriginalFontSize : newFontSize;
+                    ctrl.Font = new Font(ctrl.Font.FontFamily, newFontSize, ctrl.Font.Style);
 
                     // Special handling for certain control types
                     switch (ctrl)
@@ -118,7 +120,9 @@ namespace SchnaeppchenJaeger.Utility
                             comboBox.DrawMode = DrawMode.OwnerDrawFixed;
                             comboBox.DrawItem -= ComboBox_DrawItem;
                             comboBox.DrawItem += ComboBox_DrawItem;
-                            comboBox.ItemHeight = (int)(original.OriginalFontSize * yRatio * 1.5);
+                            int newItemHeight = (int)(newFontSize * 1.5);
+                            newItemHeight = newItemHeight <= 0 ? (int)(original.OriginalFontSize * 1.5) : newItemHeight;
+                            comboBox.ItemHeight = newItemHeight;
                             break;
 
                         case CheckedListBox checkedListBox:
@@ -188,7 +192,9 @@ namespace SchnaeppchenJaeger.Utility
             int start = richTextBox.SelectionStart;
             int length = richTextBox.SelectionLength;
             richTextBox.SelectAll();
-            richTextBox.SelectionFont = new Font(richTextBox.Font.FontFamily, richTextBox.Font.Size * yRatio, richTextBox.Font.Style);
+            float newFontSize = richTextBox.Font.Size * yRatio;
+            newFontSize = newFontSize <= 0 ? richTextBox.Font.Size : newFontSize;
+            richTextBox.SelectionFont = new Font(richTextBox.Font.FontFamily, newFontSize, richTextBox.Font.Style);
             richTextBox.Select(start, length);
             richTextBox.ResumeLayout();
         }
