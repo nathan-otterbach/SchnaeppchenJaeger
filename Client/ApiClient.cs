@@ -1,4 +1,4 @@
-﻿#pragma warning disable CS8618
+﻿#pragma warning disable CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
 
 using System.Configuration;
 using System.Net.Http.Headers;
@@ -25,6 +25,7 @@ namespace SchnaeppchenJaeger.Client
         public enum Status
         {
             Success,
+            Cancelled,
             Failure
         }
 
@@ -73,6 +74,7 @@ namespace SchnaeppchenJaeger.Client
 
             return Status.Success;
         }
+
 
         /// <summary>
         /// Gets or sets the zip code to use in API requests.

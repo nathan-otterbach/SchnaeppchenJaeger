@@ -73,59 +73,21 @@ namespace SchnaeppchenJaeger
             Program._utils.populatedData.Clear();
             _cancellationTokenSource = new CancellationTokenSource();
 
-            if (string.IsNullOrWhiteSpace(textBox_zipCode.Text.Trim()) || string.IsNullOrWhiteSpace(textBox_product.Text.Trim()))
+            string zipCode = textBox_zipCode.Text.Trim();
+            string product = textBox_product.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(zipCode) || string.IsNullOrWhiteSpace(product))
             {
                 MessageBox.Show("Please enter a zip code and product");
                 return;
             }
 
-            using (var client = new ApiClient(Convert.ToUInt32(textBox_zipCode.Text.Trim()), textBox_product.Text.Trim()))
+            using (var client = new ApiClient(Convert.ToUInt32(zipCode), product))
             {
                 await client.GetOffersAsync(_cancellationTokenSource.Token);
             }
 
-            richTextBox_bill.AppendText($"{textBox_product.Text.ToUpper()}:\n\n");
-            for (int i = 0; i < Program._utils.populatedData.Count; i++)
-            {
-                if (Program._utils.populatedData.ElementAt(i).Key.Contains("Price_")
-                    && !Program._utils.populatedData.ElementAt(i).Key.Contains("ReferencePrice_"))
-                {
-                    string priceText = $"{Program._utils.populatedData.ElementAt(i).Value} €\n";
-                    richTextBox_bill.AppendText(priceText);
-                }
-
-                else if (Program._utils.populatedData.ElementAt(i).Key.Contains("ReferencePrice_"))
-                {
-                    string refrerencePriceText = $"{Program._utils.populatedData.ElementAt(i).Value} € pro ";
-                    richTextBox_bill.AppendText(refrerencePriceText);
-                }
-
-                else if (Program._utils.populatedData.ElementAt(i).Key.Contains("FromDate_"))
-                {
-                    string fromDateText = $"Gütltig von: {Program._utils.populatedData.ElementAt(i).Value} bis ";
-                    richTextBox_bill.AppendText(fromDateText);
-                }
-
-                else if (Program._utils.populatedData.ElementAt(i).Key.Contains("RequiresLoyaltyMembership_"))
-                {
-                    if (Program._utils.populatedData.ElementAt(i).Value.Equals("True", StringComparison.OrdinalIgnoreCase))
-                    {
-                        string requiresLoyaltyMembershipText = $"Kudenkarte benötigt\n\n";
-                        richTextBox_bill.AppendText(requiresLoyaltyMembershipText);
-                    }
-                    else
-                    {
-                        string requiresLoyaltyMembershipText = $"Kudenkarte nicht benötigt\n\n";
-                        richTextBox_bill.AppendText(requiresLoyaltyMembershipText);
-                    }
-                }
-
-                else
-                {
-                    string defaultText = $"{Program._utils.populatedData.ElementAt(i).Value}\n";
-                    richTextBox_bill.AppendText(defaultText);
-                }
-            }
+            await GetAndDisplayOffersAsync(product);
         }
 
         private void checkBox_modus_CheckedChanged(object sender, EventArgs e)
@@ -277,68 +239,71 @@ namespace SchnaeppchenJaeger
         {
             GetSelectedShops();
             richTextBox_bill.Clear();
-            Program._utils.populatedData.Clear();
             _cancellationTokenSource = new CancellationTokenSource();
 
             if (string.IsNullOrWhiteSpace(textBox_zipCode.Text.Trim()) || comboBox_db_shopping_lists.SelectedIndex == -1)
             {
-                MessageBox.Show("Please enter a zip code and product");
+                MessageBox.Show("Please enter a zip code and select a shopping list");
                 return;
             }
 
-            _dbHelper.GetAllProductsFromShoppingList(comboBox_db_shopping_lists.SelectedItem.ToString());
-            for (int i = 0; i < Program._utils.products.Count; i++)
+            string selectedShoppingList = comboBox_db_shopping_lists.SelectedItem.ToString();
+            Program._utils.products = _dbHelper.GetAllProductsFromShoppingList(selectedShoppingList);
+
+            foreach (var product in Program._utils.products)
             {
-                // append results to Shoppinglist List
-                using (var client = new ApiClient(Convert.ToUInt32(textBox_zipCode.Text.Trim()), Program._utils.products[i]))
+                Program._utils.populatedData.Clear(); // Clear data for each product
+
+                await GetAndDisplayOffersAsync(product);
+            }
+        }
+
+        private async Task GetAndDisplayOffersAsync(string product)
+        {
+            using (var client = new ApiClient(Convert.ToUInt32(textBox_zipCode.Text.Trim()), product))
+            {
+                await client.GetOffersAsync(_cancellationTokenSource.Token);
+            }
+
+            if (!Program._utils.populatedData.Any())
+            {
+                return; // No valid offers for this product, skip displaying
+            }
+
+            richTextBox_bill.AppendText($"{product.ToUpper()}:\n\n");
+
+            foreach (var entry in Program._utils.populatedData)
+            {
+                string key = entry.Key;
+                string value = entry.Value;
+
+                if (key.Contains("Price_") && !key.Contains("ReferencePrice_"))
                 {
-                    await client.GetOffersAsync(_cancellationTokenSource.Token);
+                    richTextBox_bill.AppendText($"{value} €\n");
                 }
-
-                richTextBox_bill.AppendText($"{Program._utils.products[i].ToUpper()}:\n\n");
-                for (int j = 0; j < Program._utils.populatedData.Count; j++)
+                else if (key.Contains("ReferencePrice_"))
                 {
-                    if (Program._utils.populatedData.ElementAt(j).Key.Contains("Price_")
-                        && !Program._utils.populatedData.ElementAt(j).Key.Contains("ReferencePrice_"))
-                    {
-                        string priceText = $"{Program._utils.populatedData.ElementAt(j).Value} €\n";
-                        richTextBox_bill.AppendText(priceText);
-                    }
-
-                    else if (Program._utils.populatedData.ElementAt(j).Key.Contains("ReferencePrice_"))
-                    {
-                        string refrerencePriceText = $"{Program._utils.populatedData.ElementAt(j).Value} € pro ";
-                        richTextBox_bill.AppendText(refrerencePriceText);
-                    }
-
-                    else if (Program._utils.populatedData.ElementAt(j).Key.Contains("FromDate_"))
-                    {
-                        string fromDateText = $"Gütltig von: {Program._utils.populatedData.ElementAt(j).Value} bis ";
-                        richTextBox_bill.AppendText(fromDateText);
-                    }
-
-                    else if (Program._utils.populatedData.ElementAt(j).Key.Contains("RequiresLoyaltyMembership_"))
-                    {
-                        if (Program._utils.populatedData.ElementAt(j).Value.Equals("True", StringComparison.OrdinalIgnoreCase))
-                        {
-                            string requiresLoyaltyMembershipText = $"Kudenkarte benötigt\n\n";
-                            richTextBox_bill.AppendText(requiresLoyaltyMembershipText);
-                        }
-                        else
-                        {
-                            string requiresLoyaltyMembershipText = $"Kudenkarte nicht benötigt\n\n";
-                            richTextBox_bill.AppendText(requiresLoyaltyMembershipText);
-                        }
-                    }
-
-                    else
-                    {
-                        string defaultText = $"{Program._utils.populatedData.ElementAt(j).Value}\n";
-                        richTextBox_bill.AppendText(defaultText);
-                    }
+                    richTextBox_bill.AppendText($"{value} € pro ");
+                }
+                else if (key.Contains("FromDate_"))
+                {
+                    richTextBox_bill.AppendText($"Gültig von: {value} bis ");
+                }
+                else if (key.Contains("RequiresLoyaltyMembership_"))
+                {
+                    string loyaltyMembershipText = value.Equals("True", StringComparison.OrdinalIgnoreCase)
+                        ? "Kundenkarte benötigt\n\n"
+                        : "Kundenkarte nicht benötigt\n\n";
+                    richTextBox_bill.AppendText(loyaltyMembershipText);
+                }
+                else
+                {
+                    richTextBox_bill.AppendText($"{value}\n");
                 }
             }
         }
+
+
 
         private void button_create_list_Click(object sender, EventArgs e)
         {

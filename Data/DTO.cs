@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-#pragma warning disable 8618
+#pragma warning disable 8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
 
 namespace SchnaeppchenJaeger.Data
 {
